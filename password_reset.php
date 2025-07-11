@@ -11,8 +11,9 @@ include("includes/navbar.php");
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-6">
-                <div class="card">
-                <?php
+                <div class="card">                   
+                    <div class="card-header">
+                        <?php
                     if (isset($_SESSION['status'])) 
                     {
                         ?>
@@ -22,9 +23,8 @@ include("includes/navbar.php");
                         <?php
                         unset($_SESSION['status']);
                     }
-                    ?>
-                    <div class="card-header">
-                        <h5>Reset Password</h5>
+                ?>
+                        <h5>Reset Password</h5>                  
                     </div>
                     <div class="card-body p-4">
                         <form action="password_reset_code.php" method="POST">

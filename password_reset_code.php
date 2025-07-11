@@ -1,4 +1,5 @@
 <?php
+session_start();
 include("dbcon.php");
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
@@ -61,7 +62,7 @@ if(isset($_POST['password_reset'])){
             exit(0);
 
         }else{
-            $_SESSION['status']="Something went wrong. #1";
+            $_SESSION['status']="Something went wrong.";
             header("Location: password_reset.php");
             exit(0);
         }

@@ -69,22 +69,22 @@ if (isset($_POST['signup_btn'])) {
         exit();
     }
 
-    if (strlen($password) < 8 || 
-            !preg_match('/[A-Z]/', $password) || 
-            !preg_match('/[a-z]/', $password) || 
-            !preg_match('/[0-9]/', $password) || 
-            !preg_match('/[\W_]/', $password)) {
-            $_SESSION['status'] = "Password must be at least 8 characters long, include uppercase, lowercase, a number, and a special character.";
-            header("Location: signup.php");
-            // echo '<script>alert("Password must be at least 8 characters long, include uppercase, lowercase, a number, and a special character.");</script>';
-            // echo "<script>window.location.href='signup.php';</script>";
-            exit();
-            if ($password !== $confirm_password) {
-                $_SESSION['status'] = "Passwords do not match.";
-                header("Location: signup.php");
-                exit();
-            }
-    }
+    // if (strlen($password) < 8 || 
+    //         !preg_match('/[A-Z]/', $password) || 
+    //         !preg_match('/[a-z]/', $password) || 
+    //         !preg_match('/[0-9]/', $password) || 
+    //         !preg_match('/[\W_]/', $password)) {
+    //         $_SESSION['status'] = "Password must be at least 8 characters long, include uppercase, lowercase, a number, and a special character.";
+    //         header("Location: signup.php");
+    //         // echo '<script>alert("Password must be at least 8 characters long, include uppercase, lowercase, a number, and a special character.");</script>';
+    //         // echo "<script>window.location.href='signup.php';</script>";
+    //         exit();
+    //         if ($password !== $confirm_password) {
+    //             $_SESSION['status'] = "Passwords do not match.";
+    //             header("Location: signup.php");
+    //             exit();
+    //         }
+    // }
     // Validate passwords
     
 
@@ -272,35 +272,35 @@ if (isset($_POST['signup_btn'])) {
                     </div>
                     <div class="card-body">
                         <form name ="signupForm" action="" method="POST" onsubmit="return validateForm()">
-                            <div class="form-group mb-3">
+                            <div class="form-group mb-2">
                                 <label for="">First Name</label>
                                 <input type="text" name="firstname" class="form-control">
                             </div>
-                            <div class="form-group mb-3">
+                            <div class="form-group mb-2">
                                 <label for="">Middle Name</label>
                                 <input type="text" name="middlename" class="form-control">
                             </div>
-                            <div class="form-group mb-3">
+                            <div class="form-group mb-2">
                                 <label for="">Last Name</label>
                                 <input type="text" name="lastname" class="form-control">
                             </div>
-                            <div class="form-group mb-3">
+                            <div class="form-group mb-2">
                                 <label for="">Address</label>
                                 <input type="text" name="address" class="form-control">
                             </div>
-                            <div class="form-group mb-3">
+                            <div class="form-group mb-2">
                                 <label for="">Contact Number</label>
                                 <input type="text" name="contact_number" class="form-control">
                             </div>
-                            <div class="form-group mb-3">
+                            <div class="form-group mb-2">
                                 <label for="">Email</label>
                                 <input type="text" name="email" class="form-control">
                             </div>
-                            <div class="form-group mb-3">
+                            <div class="form-group mb-2">
                                 <label for="">Password</label>
                                 <input type="password" name="password" class="form-control">
                             </div>
-                            <div class="form-group mb-3">
+                            <div class="form-group mb-2">
                                 <label for="">Confirm Password</label>
                                 <input type="password" name="confirm_password" class="form-control">
                             </div>
