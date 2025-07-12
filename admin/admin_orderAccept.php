@@ -1,9 +1,9 @@
 <?php
 $page_title = "Admin Accept Information";
-include("logincode.php");
+include("../logincode.php");
 include("sidebar_admin.php");
-include("dbcon.php");
-include("includes/header.php");
+include("../dbcon.php");
+include("../includes/header.php");
 
 if (isset($_GET['orderNo'])) {
     $orderNo = $_GET['orderNo'];

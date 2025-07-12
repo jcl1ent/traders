@@ -1,9 +1,9 @@
 <?php
-include("logincode.php");
+include("../logincode.php");
 $page_title = "View Receipt";
-include("sidebar_admin.php");
-include("includes/header.php"); 
-include("dbcon.php");
+include("../sidebar_admin.php");
+include("../includes/header.php"); 
+include("../dbcon.php");
 
 // Ensure $pymntNo is set; this may come from a GET request or other means
 $pymntNo = isset($_GET['pymntNo']) ? $_GET['pymntNo'] : 0;

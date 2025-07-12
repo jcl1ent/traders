@@ -1,9 +1,9 @@
 <?php
 $page_title = "Admin Add Manpower";
-include("logincode.php");
+include("../logincode.php");
 include("sidebar_admin.php");
-include("dbcon.php");
-include("includes/header.php");
+include("../dbcon.php");
+include("../includes/header.php");
 if (isset($_POST['addManpower_btn'])) {
     $fullName = $_POST['fullName'];
     $age = $_POST['age'];
@@ -53,6 +53,9 @@ if (isset($_POST['addManpower_btn'])) {
                 <div class="card shadow">
                     <div class="card-header">
                         <h5>Add Manpower</h5>
+                        <a href="admin_manpower.php" class="btn btn-secondary">
+                            <i class="bi bi-arrow-90deg-left"></i> Back 
+                        </a>
                     </div>
                     <div class="card-body">
                         <form name ="addManpower" action="" method="POST" enctype="multipart/form-data">

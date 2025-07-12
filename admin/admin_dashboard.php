@@ -1,9 +1,9 @@
 <?php
 $page_title = "Admin Dashboard";
-include("logincode.php");
+include("../logincode.php");
 include("sidebar_admin.php");
-include("dbcon.php");
-include("includes/header.php");
+include("../dbcon.php");
+include("../includes/header.php");
 
     //Get the count of the orders
     $cOrder_query = "SELECT COUNT(*) AS total_orders FROM orders";

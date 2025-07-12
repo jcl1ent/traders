@@ -1,9 +1,9 @@
 <?php
 $page_title = "Admin Pending Orders";
-include("logincode.php");
+include("../logincode.php");
 include("sidebar_admin.php");
-include("dbcon.php");
-include("includes/header.php");
+include("../dbcon.php");
+include("../includes/header.php");
 
 ?>
 <!DOCTYPE html>

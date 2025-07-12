@@ -58,13 +58,13 @@ if (isset($_POST['login_btn'])) {
                     // Redirect to respective dashboards
                     switch ($row['role']) {
                         case 'admin':
-                            header("Location: admin_dashboard.php");
+                            header("Location: admin/admin_dashboard.php");
                             break;
                         case 'staff':
-                            header("Location: staff_dashboard.php");
+                            header("Location: staff/staff_dashboard.php");
                             break;
                         default:
-                            header("Location: dashboard.php");
+                            header("Location: customer/dashboard.php");
                             break;
                     }
                     exit();

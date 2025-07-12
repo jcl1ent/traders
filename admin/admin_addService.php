@@ -1,9 +1,9 @@
 <?php
 $page_title = "Admin Add Service";
-include("logincode.php");
+include("../logincode.php");
 include("sidebar_admin.php");
-include("dbcon.php");
-include("includes/header.php");
+include("../dbcon.php");
+include("../includes/header.php");
 if (isset($_POST['addService_btn'])) {
     $servName = $_POST['servName'];
     $rateService = $_POST['rateService'];

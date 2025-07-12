@@ -1,9 +1,9 @@
 <?php
 $page_title = "Admin Assign Branch";
-include("logincode.php");
+include("../logincode.php");
 include("sidebar_admin.php");
-include("dbcon.php");
-include("includes/header.php");
+include("../dbcon.php");
+include("../includes/header.php");
 if(isset($_POST['assignBranch'])){
     $staffId = $_POST['staffId'];
     $branch = $_POST['branch'];
