@@ -1,9 +1,9 @@
 <?php
 $page_title = "Staff Edit Manpower";
-include("logincode.php");
+include("../logincode.php");
 include("sidebar_staff.php");
-include("dbcon.php");
-include("includes/header.php");
+include("../dbcon.php");
+include("../includes/header.php");
 
 
 // Check if form was submitted

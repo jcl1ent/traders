@@ -1,9 +1,9 @@
 <?php
-include("logincode.php");
+include("../logincode.php");
 $page_title = "Products";
 include("sidebar.php");
-include("includes/header.php"); 
-include("dbcon.php");
+include("../includes/header.php"); 
+include("../dbcon.php");
 $cartCount = 0;
 
 if (isset($_SESSION['email'])) {

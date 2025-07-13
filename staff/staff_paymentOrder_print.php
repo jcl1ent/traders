@@ -1,9 +1,9 @@
 <?php
-include("logincode.php");
+include("../logincode.php");
 $page_title = "Staff View Receipt";
 include("sidebar_staff.php");
-include("includes/header.php"); 
-include("dbcon.php");
+include("../includes/header.php"); 
+include("../dbcon.php");
 ?>
 <!DOCTYPE html>
 <html lang="en">

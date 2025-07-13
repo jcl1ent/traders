@@ -1,9 +1,9 @@
 <?php
-include("logincode.php");
+include("../logincode.php");
 $page_title = "View Service";
 include("sidebar.php");
-include("includes/header.php"); 
-include("dbcon.php");
+include("../includes/header.php"); 
+include("../dbcon.php");
 
 $loggedUserId = $_SESSION['userId'];
 

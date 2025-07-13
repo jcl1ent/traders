@@ -1,9 +1,9 @@
 <?php
-include("logincode.php");
+include("../logincode.php");
 $page_title = "Raise Tickets";
 include("sidebar.php");
-include("includes/header.php"); 
-include("dbcon.php");
+include("../includes/header.php"); 
+include("../dbcon.php");
 
 if (isset($_SESSION['email'])) {
     $email = $_SESSION['email'];

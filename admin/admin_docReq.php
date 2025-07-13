@@ -1,9 +1,9 @@
 <?php
 $page_title = "Admin Transaction Documents";
-include("logincode.php");
+include("../logincode.php");
 include("sidebar_admin.php");
-include("dbcon.php"); 
-include("includes/header.php"); 
+include("../dbcon.php"); 
+include("../includes/header.php"); 
 
 $requestSql = "SELECT dr.ReqNo, dr.DocNo, dr.ReqDate, dr.status, dr.description, d.DocName 
                 FROM documents_request dr 

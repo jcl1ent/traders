@@ -1,9 +1,9 @@
 <?php
 $page_title = "Admin Sales Report";
-include("logincode.php");
+include("../logincode.php");
 include("sidebar_admin.php");
-include("dbcon.php");
-include("includes/header.php");
+include("../dbcon.php");
+include("../includes/header.php");
 
 $currentMonth = date('n');
 $currentYear = date('Y');

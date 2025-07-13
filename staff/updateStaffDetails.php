@@ -1,9 +1,9 @@
 <?php
 $page_title = "Edit Profile";
-include("logincode.php");
-include("dbcon.php");
+include("../logincode.php");
+include("../dbcon.php");
 include("sidebar_staff.php");
-include("includes/header.php");
+include("../includes/header.php");
 
 
 if (isset($_POST['UpdateStaff'])) {

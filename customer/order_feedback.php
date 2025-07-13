@@ -1,13 +1,12 @@
 <?php
-include("logincode.php");
-$page_title = "Submit Feedback";
+include("../logincode.php");
+$page_title = "View Order";
 include("sidebar.php");
-include("includes/header.php");
-include("dbcon.php");
+include("../includes/header.php"); 
+include("../dbcon.php");
 
 $loggedUserId = $_SESSION['userId'];
 
-// Use userId to get address from customers table
 $sql = "SELECT address, custId, firstname, middlename, lastname FROM customers WHERE userId = ?";
 $stmt = $con->prepare($sql);
 
@@ -50,12 +49,12 @@ $stmt->bind_result($staffId);
 $stmt->fetch();
 $stmt->close();
 
-// Initialize trscnType and pendservice
-$trscnType = "Service - Service Type"; 
+// Initialize trscnType and reqserv
+$trscnType = "Order No. - Product Name"; 
 
-// Check if 'trscnType' and 'pendservice' are passed through GET
-if (isset($_GET['trscnType']) && isset($_GET['pendservice'])) {
-    $trscnType = "Service No. " . htmlspecialchars($_GET['pendservice']) . " - " . htmlspecialchars($_GET['trscnType']);
+// Check if 'trscnType' and 'orderNo' are passed through GET
+if (isset($_GET['trscnType']) && isset($_GET['orderNo'])) {
+    $trscnType = "Order No. " . htmlspecialchars($_GET['orderNo']) . " - " . htmlspecialchars($_GET['trscnType']);
 }
 
 // Check if feedback has already been submitted for this user and service type
@@ -67,10 +66,10 @@ $checkStmt->bind_result($feedbackCount);
 $checkStmt->fetch();
 $checkStmt->close();
 
-
+// Redirect if feedback already submitted
 if ($feedbackCount > 0) {
-    echo "<script>alert('You have already submitted feedback for this service.');</script>";
-    echo "<script>window.location.href = 'vserviceAcc_customer.php';</script>";
+    echo "<script>alert('You have already submitted feedback for this Order.');</script>";
+    echo "<script>window.location.href = 'vorder_customer.php';</script>";
     exit();
 }
 
@@ -80,7 +79,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $description = $_POST['description'];
 
     $log_action_query2 = "INSERT INTO user_action_logs (adminId, action, status) VALUES (?, ?, ?)";
-    $action = $fullName . ' submitted a feedback to Service No.' . $_GET['pendservice'];
+    $action = $fullName . ' submitted a feedback to Order No.' . $_GET['orderNo'];
     $status = 'unread';
     $log_action_stmt2 = $con->prepare($log_action_query2);
     $log_action_stmt2->bind_param("iss", $adminId, $action, $status);
@@ -88,7 +87,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $log_action_stmt2->close();
 
     $log_action_query2 = "INSERT INTO user_action_logs (staffId, action, status) VALUES (?, ?, ?)";
-    $action = $fullName . ' submitted a feedback to Service No.' . $_GET['pendservice'];
+    $action = $fullName . ' submitted a feedback to Order No.' . $_GET['orderNo'];
     $status = 'unread';
     $log_action_stmt2 = $con->prepare($log_action_query2);
     $log_action_stmt2->bind_param("iss", $staffId, $action, $status);
@@ -105,17 +104,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Execute the statement and check for success
     if ($stmt->execute()) {
         echo "<script>alert('Feedback submitted successfully!');</script>";
-        echo "<script>window.location.href = 'vserviceAcc_customer.php?feedback=success';</script>";
+        echo "<script>window.location.href = 'vorder_customer.php?feedback=success';</script>";
         exit();
     } else {
         echo "<script>alert('Error submitting feedback. Please try again later.');</script>";
-        echo "<script>window.location.href = 'vserviceAcc_customer.php';</script>";
+        echo "<script>window.location.href = 'vorder_customer.php';</script>";
         exit();
     }
-    // Close the statement
-    $stmt->close();
-
-
 }
 ?>
 
@@ -129,19 +124,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </head>
 <body>
     <div class="container py-5">
-        <h2>Feedback for Service</h2>
-        <form action="" method="POST">
-            <input type="hidden" name="userId" value="<?php echo $loggedUserId; ?>">
-            <input type="hidden" name="trscnType" value="<?php echo htmlspecialchars($trscnType); ?>">
-            <div class="mb-3">
-                <label for="description" class="form-label">Your Feedback:</label>
-                <input type="text" class="form-control" name="description" required>
-            </div>
-            
-            <button type="submit" class="btn btn-primary">Submit Feedback</button>
-            <a href="vserviceAcc_customer.php" class="btn btn-secondary">Cancel</a>
-        </form>
+        <h2>Feedback for Order</h2>
+        <!-- If feedback is already submitted, don't display the form -->
+        <?php if ($feedbackCount == 0): ?>
+            <form action="" method="POST">
+                <input type="hidden" name="userId" value="<?php echo $loggedUserId; ?>">
+                <input type="hidden" name="trscnType" value="<?php echo htmlspecialchars($trscnType); ?>">
+                <div class="mb-3">
+                    <label for="description" class="form-label">Your Feedback:</label>
+                    <input type="text" class="form-control" name="description" required>
+                </div>
+                
+                <button type="submit" class="btn btn-primary">Submit Feedback</button>
+                <a href="vorder_customer.php" class="btn btn-secondary">Cancel</a>
+            </form>
+        <?php else: ?>
+            <p class="alert alert-info">You have already submitted feedback for this order.</p>
+            <a href="vorder_customer.php" class="btn btn-secondary">Back to Order Account</a>
+        <?php endif; ?>
     </div>
 </body>
 </html>
-

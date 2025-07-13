@@ -1,9 +1,9 @@
 <?php
 $page_title = "Staff Products";
-include("logincode.php");
+include("../logincode.php");
 include("sidebar_staff.php");
-include("dbcon.php");
-include("includes/header.php");
+include("../dbcon.php");
+include("../includes/header.php");
 
     // Fetch categories for the dropdown
     $categories = ["All Products", "Engine Components", "Turbocharger Components", "Valve Components"];

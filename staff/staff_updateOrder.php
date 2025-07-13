@@ -1,9 +1,9 @@
 <?php
 $page_title = "Staff Update Order";
-include("logincode.php");
+include("../logincode.php");
 include("sidebar_staff.php");
-include("dbcon.php");
-include("includes/header.php");
+include("../dbcon.php");
+include("../includes/header.php");
 
 if (isset($_POST['updateOrder'])) {
     // Retrieve posted values

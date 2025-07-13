@@ -1,9 +1,9 @@
 <?php
 $page_title = "Admin Transaction Documents";
-include("logincode.php");
+include("../logincode.php");
 include("sidebar_admin.php");
-include("dbcon.php"); 
-include("includes/header.php"); 
+include("../dbcon.php"); 
+include("../includes/header.php"); 
 
 // Enable error reporting for debugging
 error_reporting(E_ALL);

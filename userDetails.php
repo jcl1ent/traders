@@ -1,7 +1,7 @@
 <?php
 $page_title = "User Details";
-include("logincode.php");
 include("dbcon.php");
+include("logincode.php");
 include("includes/header.php");
 if(isset($_SESSION['userId'])){
     $userId = $_SESSION['userId'];
@@ -16,11 +16,11 @@ if(isset($_SESSION['userId'])){
         $row = $roleResult->fetch_assoc();
         $role = $row['role'];
         if($role == 'customer'){
-            include("sidebar.php");
+            include("customer/sidebar.php");
         }elseif($role == 'admin'){
-            include("sidebar_admin.php");
+            include("admin/sidebar_admin.php");
         }else{
-            include("sidebar_staff.php");
+            include("staff/sidebar_staff.php");
         }
     }
 
@@ -122,7 +122,7 @@ if(isset($_SESSION['userId'])){
                                                         </div>
                                                     </div>
                                                     
-                                                    <a href="dashboard.php">
+                                                    <a href="customer/dashboard.php">
                                                         <button type="button" class="btn btn-secondary bg-gradient">
                                                             Back
                                                         </button>
@@ -181,7 +181,7 @@ if(isset($_SESSION['userId'])){
                                                         <input class="form-control" type="text" value="<?php echo $row['password'] ?>" readonly>                                                
                                                         </div>
                                                     </div>
-                                                    <a href="staff_dashboard.php">
+                                                    <a href="staff/staff_dashboard.php">
                                                         <button type="button" class="btn btn-secondary bg-gradient">
                                                             Back
                                                         </button>
@@ -235,7 +235,7 @@ if(isset($_SESSION['userId'])){
                                                         <input class="form-control" type="text" value="<?php echo $admin['password']; ?>" readonly>                                                
                                                         </div>
                                                     </div>
-                                                    <a href="admin_dashboard.php">
+                                                    <a href="admin/admin_dashboard.php">
                                                         <button type="button" class="btn btn-secondary bg-gradient">
                                                             Back
                                                         </button>

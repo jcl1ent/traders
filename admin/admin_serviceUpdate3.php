@@ -1,9 +1,9 @@
 <?php
 $page_title = "Admin Service Information";
-include("logincode.php");
+include("../logincode.php");
 include("sidebar_admin.php");
-include("dbcon.php");
-include("includes/header.php");
+include("../dbcon.php");
+include("../includes/header.php");
 
 if (isset($_POST['update'])) {
     // Fetch the current values first

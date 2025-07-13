@@ -1,7 +1,7 @@
 <?php
-include("dbcon.php");
+include("../dbcon.php");
 session_abort();
-include("logincode.php");
+include("../logincode.php");
 
 if (isset($_SESSION['userId'])) {
   $userId = $_SESSION['userId'];
@@ -129,7 +129,7 @@ if (isset($_GET['page_tile'])) {
   }
   
   .oval-button:hover {
-    color: /* Add hover color here */;
+    color: inherit;
   }
 
   .header-container {

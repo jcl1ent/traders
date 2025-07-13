@@ -1,9 +1,9 @@
 <?php
 $page_title = "Staff Transaction Documents";
-include("logincode.php");
-include("sidebar_staff.php");
+include("../logincode.php");
+include("../sidebar_staff.php");
 include("dbcon.php");
-include("includes/header.php");
+include("../includes/header.php");
 
 if (!isset($_SESSION['userId'])) {
     die("User not logged in. Please log in to continue.");

@@ -1,9 +1,9 @@
 <?php
 $page_title = "Staff Service Requests";
-include("logincode.php");
+include("../logincode.php");
 include("sidebar_staff.php");
-include("dbcon.php");
-include("includes/header.php");
+include("../dbcon.php");
+include("../includes/header.php");
 
 $loggedInUserId = $_SESSION['userId'];
 $staffIdQuery = "SELECT staffId FROM staffs WHERE userId = '$loggedInUserId'";

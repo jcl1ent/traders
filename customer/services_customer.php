@@ -1,9 +1,9 @@
 <?php
 $page_title = "Services";
-include("logincode.php");
+include("../logincode.php");
 include("sidebar.php");
-include("dbcon.php");
-include("includes/header.php");
+include("../dbcon.php");
+include("../includes/header.php");
 
 if (isset($_SESSION['email'])) {
     $email = $_SESSION['email'];

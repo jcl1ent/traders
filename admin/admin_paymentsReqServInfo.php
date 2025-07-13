@@ -1,7 +1,7 @@
 <?php
 include("../logincode.php");
 $page_title = "View Receipt";
-include("../sidebar_admin.php");
+include("sidebar_admin.php");
 include("../includes/header.php"); 
 include("../dbcon.php");
 

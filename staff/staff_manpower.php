@@ -1,9 +1,9 @@
 <?php
 $page_title = "Staff Manpower";
-include("logincode.php");
+include("../logincode.php");
 include("sidebar_staff.php");
-include("dbcon.php");
-include("includes/header.php");
+include("../dbcon.php");
+include("../includes/header.php");
 
 ?>
 <!doctype html>

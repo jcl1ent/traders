@@ -1,9 +1,9 @@
 <?php
 $page_title = "Dashboard";
-include("logincode.php");
+include("../logincode.php");
 include("sidebar.php");
-include("dbcon.php");
-include("includes/header.php");
+include("../dbcon.php");
+include("../includes/header.php");
 
 if (isset($_SESSION['email']) && isset($_SESSION['custId'])  && isset($_SESSION['userId'])) {
 

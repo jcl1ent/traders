@@ -4,3 +4,9 @@ For All
 Admin
 1. admin_services : search for services should be real-time
 2. admin service requests: pendings, accepted, decline, etc. should be real-time
+
+
+
+
+
+ISSUE: if gikan sa userDetails goods ra if mu access sa Sidebar, pero after accessing the sidebar if gusto mubalhin laing page, ma page not found.

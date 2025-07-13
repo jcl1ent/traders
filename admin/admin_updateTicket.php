@@ -1,9 +1,9 @@
 <?php
 $page_title = "Admin Update Ticket";
-include("logincode.php");
+include("../logincode.php");
 include("sidebar_admin.php");
-include("dbcon.php");
-include("includes/header.php");
+include("../dbcon.php");
+include("../includes/header.php");
 
 if (isset($_POST['updateTicket'])) {
     $tickNo = $_POST['tickNo'];

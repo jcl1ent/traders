@@ -1,9 +1,9 @@
 <?php
-include("logincode.php");
+include("../logincode.php");
 $page_title = "Payments";
 include("sidebar.php");
-include("includes/header.php");
-include("dbcon.php");
+include("../includes/header.php");
+include("../dbcon.php");
 
 if (isset($_POST['submitReceipt'])) {
     // Check if files were uploaded and if the `pymntNo` is provided.

@@ -1,9 +1,9 @@
 <?php
 $page_title = "Admin User Accounts";
-include("logincode.php");
+include("../logincode.php");
 include("sidebar_admin.php");
-include("dbcon.php");
-include("includes/header.php");
+include("../dbcon.php");
+include("../includes/header.php");
 
 
 ?>
@@ -26,7 +26,7 @@ include("includes/header.php");
                                         $userId = $_GET['userId'];
                                     
                                         // Step 1: Fetch the custId based on userId from the users table
-                                        $sql = "SELECT custId FROM customers WHERE userId = ?";
+                                        $sql = "SELECT staffId FROM staffs WHERE userId = ?";
                                         $stmt = $con->prepare($sql);
                                         $stmt->bind_param("i", $userId);
                                         $stmt->execute();
@@ -36,27 +36,27 @@ include("includes/header.php");
                                         // Check if custId exists
                                         if ($result->num_rows > 0) {
                                             $row = $result->fetch_assoc();
-                                            $custId = $row['custId'];
+                                            $staffId = $row['staffId'];
                                     
                                             // Step 2: Now, fetch the customer information using custId
-                                            $sql_customer = "SELECT * FROM customers WHERE custId = ?";
-                                            $stmt_customer = $con->prepare($sql_customer);
-                                            $stmt_customer->bind_param("i", $custId);
-                                            $stmt_customer->execute();
-                                            $customer_result = $stmt_customer->get_result();
+                                            $sql_staff = "SELECT * FROM staffs WHERE staffId = ?";
+                                            $stmt_staff = $con->prepare($sql_staff);
+                                            $stmt_staff->bind_param("i", $staffId);
+                                            $stmt_staff->execute();
+                                            $staff_result = $stmt_staff->get_result();
                                     
                                             // Check if customer information exists
-                                            if ($customer_result->num_rows > 0) {
-                                                $customer = $customer_result->fetch_assoc();
-                                                $fullName = $customer['firstname'] .' '. $customer['middlename'] .' '. $customer['lastname'];
+                                            if ($staff_result->num_rows > 0) {
+                                                $staff = $staff_result->fetch_assoc();
+                                                $fullName = $staff['firstname'] .' '. $staff['middlename'] .' '. $staff['lastname'];
                                                 // Display customer information
                                                 ?>
                                                 <form>
-                                                    <h3 class="text-center pb-2">CUSTOMER INFORMATION</h3>
+                                                    <h3 class="text-center pb-2">STAFF INFORMATION</h3>
                                                     <div class="mb-3 row">
-                                                        <label for="staticCustId" class="col col-form-label">Customer ID:</label>
+                                                        <label for="staticCustId" class="col col-form-label">Staff ID:</label>
                                                         <div class="col">
-                                                        <input class="form-control" type="text" value="<?php echo $customer['custId']; ?>"  disabled readonly>                                                    
+                                                        <input class="form-control" type="text" value="<?php echo $staff['staffId']; ?>"  disabled readonly>                                                    
                                                         </div>
                                                     </div>
                                                     <div class="mb-3 row">
@@ -68,25 +68,25 @@ include("includes/header.php");
                                                     <div class="mb-3 row">
                                                         <label for="staticEmail" class="col col-form-label">Email:</label>
                                                         <div class="col">
-                                                        <input class="form-control" type="text" value="<?php echo $customer['email']; ?>"  disabled readonly>                                                    
+                                                        <input class="form-control" type="text" value="<?php echo $staff['email']; ?>"  disabled readonly>                                                    
                                                         </div>
                                                     </div>
                                                     <div class="mb-3 row">
                                                         <label for="staticContact_number" class="col col-form-label">Contact Number:</label>
                                                         <div class="col">
-                                                        <input class="form-control" type="text" value="<?php echo $customer['contact_number']; ?>"  disabled readonly>                                                    
+                                                        <input class="form-control" type="text" value="<?php echo $staff['contact_number']; ?>"  disabled readonly>                                                    
                                                         </div>
                                                     </div>
                                                     <div class="mb-3 row">
                                                         <label for="staticAddress" class="col col-form-label">Address:</label>
                                                         <div class="col">
-                                                        <input class="form-control" type="text" value="<?php echo $customer['address']; ?>"  disabled readonly>                                                    
+                                                        <input class="form-control" type="text" value="<?php echo $staff['address']; ?>"  disabled readonly>                                                    
                                                         </div>
                                                     </div>
                                                     <div class="mb-3 row">
-                                                        <label for="staticCreateDate" class="col col-form-label">Registered Date:</label>
+                                                        <label for="staticCreateDate" class="col col-form-label">Branch:</label>
                                                         <div class="col">
-                                                        <input class="form-control" type="text" value="<?php echo $customer['createDate']; ?>"  disabled readonly>                                                    
+                                                        <input class="form-control" type="text" value="<?php echo $staff['branch']; ?>"  disabled readonly>                                                    
                                                         </div>
                                                     </div>
                                                     <a href="admin_userAccounts.php">
@@ -100,7 +100,7 @@ include("includes/header.php");
                                                 echo "Customer information not found.";
                                             }
                                     
-                                            $stmt_customer->close();
+                                            $stmt_staff->close();
                                         } else {
                                             echo "No customer found for the provided userId.";
                                         }

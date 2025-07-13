@@ -132,7 +132,7 @@ if (isset($_GET['page_title'])) {
   }
 
   .oval-button:hover {
-    color: /* Add hover color here */;
+    color: inherit;
   }
 
   .header-container {
