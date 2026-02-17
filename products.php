@@ -9,43 +9,12 @@ include("includes/navbar.php");
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="style.css">
-    <style>
-        html, body {
-            height: 100%; /* Ensures the body and html are 100% of the viewport */
-            margin: 0;
-            padding: 0;
-        }
-        body {
-            background-image: url('images_productsAndservices/RONYX TRADING ENGINEERING SERVICES.png'); /* Path to your image */
-            background-size: cover; /* Ensure the image covers the entire page */
-            background-position: center; /* Center the image */
-            background-repeat: no-repeat; /* Prevents the image from repeating */
-            background-attachment: fixed; /* Makes the background image stay fixed while scrolling */
-        }        
-
-        .header {
-            background: rgba(255, 255, 255, 0.1); /* Light transparent white for glass effect */
-            padding: 3rem; /* Increased padding */
-            border-radius: 15px;
-            backdrop-filter: blur(5px); /* Makes the background blurry */
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* Increased shadow for depth */
-            max-width: auto; /* Increased max width */
-            width: 100%; /* Full width on smaller screens */
-            
-        }
-        .header h1{
-            font-family: "myFont";
-            src: url("myFont.woff2");
-        }
-
-    
-    </style>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 <body>
     <div class="header">
-        <h1 class="text-light">PRODUCTS</h1>
-        <div class="wrapper">
+        <h1 class="custom-bg">PRODUCTS</h1>
+        <div class="wrapper1">
             <div class="image">
                 <img src="images_productsAndservices\Akasaka AH-38 Cylinder Head.jpg">
                 <div class="content">
@@ -111,8 +80,8 @@ include("includes/navbar.php");
         </div>
     </div>
     <div class="header">
-        <h1 class="text-light">SERVICES</h1>
-        <div class="wrapper">
+        <h1 class="custom-bg">SERVICES</h1>
+        <div class="wrapper1">
             <div class="image">
                 <img src="images_productsAndservices\welding_technology.jpg">
                 <div class="content">

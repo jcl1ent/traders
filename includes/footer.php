@@ -1,7 +1,12 @@
-<footer class="footer bg-transparent text-center py-2" style="position: fixed; width: 100%; bottom: 0; height: 10%; z-index: 100;">
+<style>
+    body {
+        overflow: hidden;
+        }
+</style>
+<footer class="footer bg-transparent text-center py-2">
     <div class="container-fluid text-color: light">
-        <p class="text-light">&copy; Copyright. All rights reserved. 2024</p>
-        <p class="text-light"><b>Ronyx Trading Engineering Services</b></p>       
+        <p class="text-light fw-bold">&copy; Copyright. All rights reserved. 2024</p>
+        <p class="text-light fw-bold"><b>Ronyx Trading Engineering Services</b></p>       
     </div>
 </footer>
 

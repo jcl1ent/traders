@@ -20,7 +20,7 @@ if (isset($_SESSION['userId'])) {
     $row = $result->fetch_assoc();
     $fullName = ucwords($row['fullName']); // Get the username from the query result
     $nameParts = explode(' ', $fullName);
-    $name = $nameParts[0]. ' ' . $nameParts[2];
+    $name = $nameParts[0] . ' ' . $nameParts[count($nameParts) - 1];
  
   } else {
     // If user not found, set a default value or handle it
@@ -115,6 +115,7 @@ if (isset($_GET['page_title'])) {
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+<link rel="stylesheet" type="text/css" href="../css/sidebar.css">
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"></script>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -124,76 +125,33 @@ if (isset($_GET['page_title'])) {
 <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
 <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
-<style>
-  .oval-button {
-    border-radius: 10px;
-    display: inline-block;
-    align-items: center;
-    text-align: center;
-    margin-bottom: 10px;
-  }
 
-  .oval-button:hover {
-    color: inherit;
-  }
-
-  .header-container {
-    display: flex;
-    align-items: center;
-    justify-content: space-between; /* Ensures both button and heading are spaced out */
-    padding: 10px 20px;
-   
-  }
-
-  .header-container h1 {
-    margin: 0;
-    text-align: center;
-    flex-grow: 1; /* Ensures h1 takes up remaining space */
-  }
-
-  .header-container button {
-    flex-shrink: 0; /* Prevents the button from shrinking */
-  }
-
-  /* Styling for the username display */
-  .username {
-    position: relative;
-    font-size: 16px;
-    color: white;
-    white-space: nowrap; /* Prevents text from wrapping */
-    overflow: hidden; /* Ensures text that overflows is hidden */
-    text-overflow: ellipsis; /* Adds ellipsis (...) for overflow text */
-    max-width: 150px; /* Set a maximum width for the button */
-    display: inline-block; /* Ensure it behaves like a block */
-    vertical-align: middle; /* Center aligns the text vertically */
-}
-</style>
 <body>
 
 <!-- Sidebar -->
-<div class="w3-sidebar w3-bar-block w3-border-right oval-button" style="display:none" id="mySidebar">
+<div class="w3-sidebar w3-bar-block w3-border-right bg oval-button bg" style="display:none" id="mySidebar">
   <button onclick="w3_close()" class="w3-bar-item w3-small w3-red oval-button">Close &times;</button>
-  <a href="/traders/customer/dashboard.php" class="w3-bar-item w3-button w3-blue-grey oval-button"> <i class="bi bi-speedometer"></i> Dashboard</a>
-  <a href="/traders/customer/customerServiceList.php" class="w3-bar-item w3-button w3-blue-grey oval-button"><i class="bi bi-gear-wide-connected"></i> Services</a>
-  <a href="/traders/customer/services_customer.php" class="w3-bar-item w3-button w3-blue-grey oval-button"><i class="bi bi-tools"></i> Request Service</a>
-  <a href="/traders/customer/products_customer.php" class="w3-bar-item w3-button w3-blue-grey oval-button"><i class="bi bi-box-fill"></i> Products</a>
-  <a href="/traders/customer/payments_customer.php" class="w3-bar-item w3-button w3-blue-grey oval-button"><i class="bi bi-credit-card-fill"></i> Payments</a>
-  <a href="/traders/customer/tickets_customer.php" class="w3-bar-item w3-button w3-blue-grey oval-button"><i class="bi bi-ticket-fill"></i> Raise Ticket</a>
+  <a href="/traders/customer/dashboard.php" class="w3-bar-item w3-button custom-btn oval-button"> <i class="bi bi-speedometer"></i> Dashboard</a>
+  <a href="/traders/customer/customerServiceList.php" class="w3-bar-item w3-button custom-btn oval-button"><i class="bi bi-gear-wide-connected"></i> Services</a>
+  <a href="/traders/customer/services_customer.php" class="w3-bar-item w3-button custom-btn oval-button"><i class="bi bi-tools"></i> Request Service</a>
+  <a href="/traders/customer/products_customer.php" class="w3-bar-item w3-button custom-btn oval-button"><i class="bi bi-box-fill"></i> Products</a>
+  <a href="/traders/customer/payments_customer.php" class="w3-bar-item w3-button custom-btn oval-button"><i class="bi bi-credit-card-fill"></i> Payments</a>
+  <a href="/traders/customer/tickets_customer.php" class="w3-bar-item w3-button custom-btn oval-button"><i class="bi bi-ticket-fill"></i> Raise Ticket</a>
   <!-- Dropdown for Statuses -->
-  <a href="javascript:void(0)" class="w3-bar-item w3-button w3-blue-grey oval-button" onclick="toggleDropdown()"><i class="bi bi-clipboard2-data-fill"></i> Statuses &#9662;</a>
+  <a href="javascript:void(0)" class="w3-bar-item w3-button custom-btn oval-button" onclick="toggleDropdown()"><i class="bi bi-clipboard2-data-fill"></i> Statuses &#9662;</a>
   <div id="statusDropdown" class="w3-hide w3-white w3-bar-block">
-    <a href="/traders/customer/vservice_customer.php" class="w3-bar-item w3-button w3-blue-grey oval-button"><i class="bi bi-gear-fill"></i> View Service</a>
-    <a href="/traders/customer/vorder_customer.php" class="w3-bar-item w3-button w3-blue-grey oval-button"><i class="bi bi-bag-fill"></i> View Order</a>
-    <a href="/traders/customer/vticket_customer.php" class="w3-bar-item w3-button w3-blue-grey oval-button"><i class="bi bi-ticket-perforated-fill"></i> View Ticket</a>
+    <a href="/traders/customer/vservice_customer.php" class="w3-bar-item w3-button custom-btn oval-button"><i class="bi bi-gear-fill"></i> View Service</a>
+    <a href="/traders/customer/vorder_customer.php" class="w3-bar-item w3-button custom-btn oval-button"><i class="bi bi-bag-fill"></i> View Order</a>
+    <a href="/traders/customer/vticket_customer.php" class="w3-bar-item w3-button custom-btn oval-button"><i class="bi bi-ticket-perforated-fill"></i> View Ticket</a>
   </div>
-  <a href="/traders/customer/customer_transDoc.php" class="w3-bar-item w3-button w3-blue-grey oval-button"><i class="bi bi-file-earmark-text-fill"></i> Transaction Documents</a>
+  <a href="/traders/customer/customer_transDoc.php" class="w3-bar-item w3-button custom-btn oval-button"><i class="bi bi-file-earmark-text-fill"></i> Transaction Documents</a>
   <!-- <br><br><br><br><br>
   <a href="logout.php" class="w3-bar-item w3-button w3-blue-grey oval-button"><i class="bi bi-box-arrow-left"></i> Logout</a> -->
 </div>
   
 <!-- Page Content -->
-<div class="w3-blue-grey header-container">
-    <button class="w3-button w3-blue-grey w3-xlarge" onclick="w3_open()">☰</button>
+<div class="header-container w3-container">
+    <button class="w3-button w3-xlarge" onclick="w3_open()">☰</button>
     <h1><?php echo $page_title; ?></h1>
     <div class="notification-badge">
     <button class="btn btn-transparent dropdown-toggle" type="button" id="notificationDropdown" data-bs-toggle="dropdown" aria-expanded="true">

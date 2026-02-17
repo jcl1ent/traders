@@ -64,13 +64,14 @@ if (isset($_SESSION['email']) && isset($_SESSION['custId'])  && isset($_SESSION[
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="../css/style.css">
 </head>
-<body class="bg-success text-dark bg-opacity-10">
+<body>
     <div class="py-5">
         <div class="container">
             <div class="row d-flex justify-content-around ">
                 <div class="col-md-4 col-xl-3 ms-3 pt-4">
-                    <div class="card shadow bg-primary bg-gradient mb-4">
+                    <div class="card shadow custom-bg bg-gradient mb-4">
                         <div class="card-header">
                             <h5 class="text-center text-white">Service Requested</h5>
                         </div>
@@ -92,7 +93,7 @@ if (isset($_SESSION['email']) && isset($_SESSION['custId'])  && isset($_SESSION[
                     </div>
                 </div>
                 <div class="col-md-4 col-xl-3 ms-3 pt-4">
-                    <div class="card shadow bg-success bg-gradient mb-4">
+                    <div class="card shadow custom-bg mb-4">
                         <div class="card-header">
                             <h5 class="text-center text-white">Accepted Service Request</h5>
                         </div>
@@ -114,7 +115,7 @@ if (isset($_SESSION['email']) && isset($_SESSION['custId'])  && isset($_SESSION[
                     </div>
                 </div>
                 <div class="col-md-4 col-xl-3 ms-3 pt-4">
-                    <div class="card shadow bg-danger bg-gradient mb-4">
+                    <div class="card shadow custom-bg bg-gradient mb-4">
                         <div class="card-header">
                             <h5 class="text-center text-white">Denied Service Request</h5>
                         </div>
@@ -136,7 +137,7 @@ if (isset($_SESSION['email']) && isset($_SESSION['custId'])  && isset($_SESSION[
                     </div>
                 </div>
                 <div class="col-md-4 col-xl-3 ms-3 pt-4">
-                    <div class="card shadow bg-warning bg-gradient mb-4">
+                    <div class="card shadow custom-bg mb-4">
                         <div class="card-header">
                             <h5 class="text-center text-white">Tickets Submitted</h5>
                         </div>
@@ -158,7 +159,7 @@ if (isset($_SESSION['email']) && isset($_SESSION['custId'])  && isset($_SESSION[
                     </div>
                 </div>
                 <div class="col-md-4 col-xl-3 ms-3 pt-4">
-                    <div class="card shadow bg-dark bg-gradient mb-4">
+                    <div class="card shadow custom-bg bg-gradient mb-4">
                         <div class="card-header">
                             <h5 class="text-center text-white">Total Orders Made</h5>
                         </div>
@@ -178,7 +179,7 @@ if (isset($_SESSION['email']) && isset($_SESSION['custId'])  && isset($_SESSION[
                     </div>
                 </div>
                 <div class="col-md-4 col-xl-3 ms-3 pt-4">
-                    <div class="card shadow bg-secondary bg-gradient mb-4">
+                    <div class="card shadow custom-bg mb-4">
                         <div class="card-header">
                             <h5 class="text-center">Delivered Orders</h5>
                         </div>
@@ -200,125 +201,125 @@ if (isset($_SESSION['email']) && isset($_SESSION['custId'])  && isset($_SESSION[
             </div>
         </div>
     </div> 
-    <div class="container">
+<div class="container">
     <div class="row justify-content-center">
-        <!-- Most Requested Service -->
-        <div class="col-md-3 mb-3">
-            <div class="card-body text-size p-2 bg-success shadow-sm rounded">
-                <h5 class="text-center mb-2 text-white">Most Requested Service</h5>
-                <div class="card-footer d-flex flex-column align-items-center text-black">
-                <?php
-                    // Fetch the most requested service
-                    $Tserv_query = "SELECT reqserv_service.servName, COUNT(*) AS serv_trend, services.servImg, services.servName, services.rateService, reqserv.servStatus
-                                    FROM reqserv_service
-                                    INNER JOIN services ON reqserv_service.servCode = services.servCode
-                                    INNER JOIN reqserv ON reqserv_service.reqserv = reqserv.reqserv
-                                    WHERE reqserv.servStatus = 'Service Completed'
-                                    GROUP BY reqserv_service.servName,
-                                             services.servImg,
-                                             services.servName,
-                                             services.rateService,
-                                             reqserv.servStatus
-                                    ORDER BY serv_trend DESC LIMIT 1";
-                    $stmt_Tserv = $con->prepare($Tserv_query);
-                    $stmt_Tserv->execute();
-                    $result_Tserv = $stmt_Tserv->get_result();
-                    $row_Tserv = $result_Tserv->fetch_assoc();
-                    $stmt_Tserv->close();
+        <!-- Combined: Most Requested Service & Best Selling Product (centered) -->
+        <div class="col-md-8 mb-3 mx-auto">
+            <div class="d-flex justify-content-center gap-3 flex-wrap">
+                <div class="card-body text-size p-2 custom-bg shadow-sm rounded" style="min-width:280px; max-width:380px;">
+                    <h5 class="text-center mb-2 text-white">Most Requested Service</h5>
+                    <div class="card-footer d-flex flex-column align-items-center text-black">
+                    <?php
+                        // Fetch the most requested service
+                        $Tserv_query = "SELECT reqserv_service.servName, COUNT(*) AS serv_trend, services.servImg, services.servName, services.rateService, reqserv.servStatus
+                                        FROM reqserv_service
+                                        INNER JOIN services ON reqserv_service.servCode = services.servCode
+                                        INNER JOIN reqserv ON reqserv_service.reqserv = reqserv.reqserv
+                                        WHERE reqserv.servStatus = 'Service Completed'
+                                        GROUP BY reqserv_service.servName,
+                                                 services.servImg,
+                                                 services.servName,
+                                                 services.rateService,
+                                                 reqserv.servStatus
+                                        ORDER BY serv_trend DESC LIMIT 1";
+                        $stmt_Tserv = $con->prepare($Tserv_query);
+                        $stmt_Tserv->execute();
+                        $result_Tserv = $stmt_Tserv->get_result();
+                        $row_Tserv = $result_Tserv->fetch_assoc();
+                        $stmt_Tserv->close();
 
-                    $most_repetitive_servType = $row_Tserv['servType'] ?? 'None';
-                    $total_serv_count = $row_Tserv['serv_trend'] ?? 'None';
-                    $serv_rate = $row_Tserv['rateService'] ?? 'None';
-                    $serv_image_data = $row_Tserv['servImg'] ?? null;
-                    $serv_name = $row_Tserv['servName'] ?? 'None';
+                        $most_repetitive_servType = $row_Tserv['servType'] ?? 'None';
+                        $total_serv_count = $row_Tserv['serv_trend'] ?? 'None';
+                        $serv_rate = $row_Tserv['rateService'] ?? 'None';
+                        $serv_image_data = $row_Tserv['servImg'] ?? null;
+                        $serv_name = $row_Tserv['servName'] ?? 'None';
 
-                    // Check if servImg is null and handle accordingly
-                    if ($serv_image_data === null) {
-                        $serv_image_base64 = 'None'; // Set to 'None' if image is null
-                    } else {
-                        $serv_image_base64 = base64_encode($serv_image_data);
-                    }
+                        // Check if servImg is null and handle accordingly
+                        if ($serv_image_data === null) {
+                            $serv_image_base64 = 'None'; // Set to 'None' if image is null
+                        } else {
+                            $serv_image_base64 = base64_encode($serv_image_data);
+                        }
 
-                    echo "<div class='text-center mb-2'>";
-                    // Display image or 'None' if no image
-                    if ($serv_image_base64 === 'None') {
-                        echo "<p>None</p>"; // Display "None" if image is null
-                    } else {
-                        echo "<img src='data:image/jpeg;base64," . $serv_image_base64 . "' alt='" . $most_repetitive_servType . "' class='img-fluid rounded' style='width: 60px; height: 60px; object-fit: cover;'>";
-                    }
-                    echo "</div>";
+                        echo "<div class='text-center mb-2 text-white'>";
+                        // Display image or 'None' if no image
+                        if ($serv_image_base64 === 'None') {
+                            echo "<p>None</p>"; // Display "None" if image is null
+                        } else {
+                            echo "<img src='data:image/jpeg;base64," . $serv_image_base64 . "' alt='" . $most_repetitive_servType . "' class='img-fluid rounded' style='width: 60px; height: 60px; object-fit: cover;'>";
+                        }
+                        echo "</div>";
 
-                    echo "<div class='text-center'>";
-                    echo "<p class='mb-1 fw-bold'>Service: <span class='fw-normal'>" . $serv_name . "</span></p>";
-                    echo "<p class='mb-1 fw-bold'>Rate: <span class='fw-normal'>" . $serv_rate . "</span></p>";
-                    echo "<p class='mb-1 fw-normal'>Total: <span class='fw-bold'>" . $total_serv_count . "</span></p>";
-                    echo "</div>";
-                ?>
+                        echo "<div class='text-center text-white'>";
+                        echo "<p class='mb-1 fw-bold'>Service: <span class='fw-normal'>" . $serv_name . "</span></p>";
+                        echo "<p class='mb-1 fw-bold'>Rate: <span class='fw-normal'>" . $serv_rate . "</span></p>";
+                        echo "<p class='mb-1 fw-bold'>Total: <span class='fw-normal'>" . $total_serv_count . "</span></p>";
+                        echo "</div>";
+                    ?>
+                    </div>
+                    <a class="d-block text-center mt-2 text-white bg-dark p-1 rounded" href="customerServiceList.php" style="text-decoration: none; font-size: 1.1rem;">
+                        <i class="fas fa-angle-right"></i> Full Details
+                    </a>
                 </div>
-                <a class="d-block text-center mt-2 text-white bg-dark p-1 rounded" href="customerServiceList.php" style="text-decoration: none; font-size: 1.1rem;">
-                    <i class="fas fa-angle-right"></i> Full Details
-                </a>
+
+                <div class="card-body text-size p-2 custom-bg shadow-sm rounded" style="min-width:280px; max-width:380px;">
+                    <h5 class="text-center mb-2 text-white">Best Selling Product</h5>
+                    <div class="card-footer d-flex flex-column align-items-center text-black">
+                    <?php
+                        // Fetch the best-selling product
+                        $Tprod_query = "SELECT order_items.prodName, 
+                                        SUM(order_items.quantity) AS total_quantity,
+                                        products.prodImg,
+                                        products.prodprice
+                                        FROM order_items
+                                        INNER JOIN orders ON order_items.orderNo = orders.orderNo
+                                        INNER JOIN products ON order_items.prodNo = products.prodNo
+                                        WHERE orders.status = 'Order Delivered'
+                                        GROUP BY order_items.prodName,
+                                                 products.prodImg,
+                                                 products.prodprice
+                                        ORDER BY total_quantity DESC LIMIT 1";
+                        $stmt_Tprod = $con->prepare($Tprod_query);
+                        $stmt_Tprod->execute();
+                        $result_Tprod = $stmt_Tprod->get_result();
+                        $row_Tprod = $result_Tprod->fetch_assoc();
+                        $stmt_Tprod->close();
+
+                        $prod_name = $row_Tprod['prodName'] ?? 'None';
+                        $total_quantity = $row_Tprod['total_quantity'] ?? 'None';
+                        $prod_image_data = $row_Tprod['prodImg'] ?? null;
+                        $prod_price = $row_Tprod['prodprice'] ?? 'None';
+
+                        // Check if image data is null and set the appropriate value
+                        if ($prod_image_data === null) {
+                            $prod_image_base64 = 'None';
+                        } else {
+                            $prod_image_base64 = base64_encode($prod_image_data);
+                        }
+
+                        echo "<div class='text-center mb-2 text-white'>";
+                        // Display image or 'None' if no image
+                        if ($prod_image_base64 === 'None') {
+                            echo "<p>None</p>";
+                        } else {
+                            echo "<img src='data:image/jpeg;base64," . $prod_image_base64 . "' alt='" . $prod_name . "' class='img-fluid rounded' style='width: 60px; height: 60px; object-fit: cover;'>";
+                        }
+                        echo "</div>";
+                        echo "<div class='text-center text-white'>";
+                        echo "<p class='mb-1 fw-bold'>Product: <span class='fw-normal text-white'>" . $prod_name . "</span></p>";
+                        echo "<p class='mb-1 fw-bold'>Price: <span class='fw-normal text-white'>" . $prod_price . "</span></p>";
+                        echo "<p class='mb-1 fw-bold'>Sold: <span class='fw-normal text-white'>" . $total_quantity . "</span></p>";
+                        echo "</div>";
+                    ?>
+                    </div>
+                    <a class="d-block text-center mt-2 text-white bg-dark p-1 rounded" href="products_customer.php" style="text-decoration: none; font-size: 1.1rem;">
+                        <i class="fas fa-angle-right"></i> Full Details
+                    </a>
+                </div>
             </div>
         </div>
-
-        <!-- Best Selling Product -->
-        <div class="col-md-3 mb-3">
-            <div class="card-body text-size p-2 bg-success shadow-sm rounded">
-                <h5 class="text-center mb-2 text-white">Best Selling Product</h5>
-                <div class="card-footer d-flex flex-column align-items-center text-black">
-                <?php
-                    // Fetch the best-selling product
-                    $Tprod_query = "SELECT order_items.prodName, 
-                                    SUM(order_items.quantity) AS total_quantity,
-                                    products.prodImg,
-                                    products.prodprice
-                                    FROM order_items
-                                    INNER JOIN orders ON order_items.orderNo = orders.orderNo
-                                    INNER JOIN products ON order_items.prodNo = products.prodNo
-                                    WHERE orders.status = 'Order Delivered'
-                                    GROUP BY order_items.prodName,
-                                             products.prodImg,
-                                             products.prodprice
-                                    ORDER BY total_quantity DESC LIMIT 1";
-                    $stmt_Tprod = $con->prepare($Tprod_query);
-                    $stmt_Tprod->execute();
-                    $result_Tprod = $stmt_Tprod->get_result();
-                    $row_Tprod = $result_Tprod->fetch_assoc();
-                    $stmt_Tprod->close();
-
-                    $prod_name = $row_Tprod['prodName'] ?? 'None';
-                    $total_quantity = $row_Tprod['total_quantity'] ?? 'None';
-                    $prod_image_data = $row_Tprod['prodImg'] ?? null;
-                    $prod_price = $row_Tprod['prodprice'] ?? 'None';
-
-                    // Check if image data is null and set the appropriate value
-                    if ($prod_image_data === null) {
-                        $prod_image_base64 = 'None';
-                    } else {
-                        $prod_image_base64 = base64_encode($prod_image_data);
-                    }
-
-                    echo "<div class='text-center mb-2'>";
-                    // Display image or 'None' if no image
-                    if ($prod_image_base64 === 'None') {
-                        echo "<p>None</p>";
-                    } else {
-                        echo "<img src='data:image/jpeg;base64," . $prod_image_base64 . "' alt='" . $prod_name . "' class='img-fluid rounded' style='width: 60px; height: 60px; object-fit: cover;'>";
-                    }
-                    echo "</div>";
-                    echo "<div class='text-center'>";
-                    echo "<p class='mb-1 fw-bold'>Product: <span class='fw-normal'>" . $prod_name . "</span></p>";
-                    echo "<p class='mb-1 fw-bold'>Price: <span class='fw-normal'>" . $prod_price . "</span></p>";
-                    echo "<p class='mb-1 fw-normal'>Sold: <span class='fw-bold'>" . $total_quantity . "</span></p>";
-                    echo "</div>";
-                ?>
-                </div>
-                <a class="d-block text-center mt-2 text-white bg-dark p-1 rounded" href="products_customer.php" style="text-decoration: none; font-size: 1.1rem;">
-                    <i class="fas fa-angle-right"></i> Full Details
-                </a>
-            </div>
-        </div>
-
+    </div>  
+</div>
 
 </body>
 </html>

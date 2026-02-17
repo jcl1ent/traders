@@ -178,9 +178,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" type="text/css" href="../css/style.css">
 </head>
-<body class="bg-success text-dark bg-opacity-10">
+<body class="text-dark">
     <div class="container mt-4 mb-4">
         <div class="card">
             <div class="card-body">

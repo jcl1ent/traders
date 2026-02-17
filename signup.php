@@ -1,8 +1,6 @@
 <?php 
 session_start();
 $page_title = "Sign Up";
-include("includes/header.php"); 
-include("includes/navbar.php");
 include("dbcon.php");
 
 use PHPMailer\PHPMailer\PHPMailer;
@@ -55,19 +53,7 @@ if (isset($_POST['signup_btn'])) {
     $password = $_POST['password'];
     $confirm_password = $_POST['confirm_password'];
     $verify_token = md5(rand());
-    
-    if (!preg_match("/^09\d{9}$/", $contact_number)) {
-        $_SESSION['status'] = "Invalid contact number. It must start with 09 and be 11 digits long.";
-        header("Location: signup.php");
-        exit();
-    }
 
-    // Validate email format
-    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        $_SESSION['status'] = "Invalid email format.";
-        header("Location: signup.php");
-        exit();
-    }
 
     // if (strlen($password) < 8 || 
     //         !preg_match('/[A-Z]/', $password) || 
@@ -154,103 +140,18 @@ if (isset($_POST['signup_btn'])) {
         }
     }
 }
+
+// Include headers AFTER all PHP logic and redirects
+include("includes/header.php"); 
+include("includes/navbar.php");
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
-        html, body {
-            height: 100%; /* Ensures the body and html are 100% of the viewport */
-            margin: 0;
-            padding: 0;
-        }
-        body {
-            background-image: url('images_productsAndservices/RONYX TRADING ENGINEERING SERVICES.png'); /* Path to your image */
-            background-size: cover; /* Ensure the image covers the entire page */
-            background-position: center; /* Center the image */
-            background-repeat: no-repeat; /* Prevents the image from repeating */
-            background-attachment: fixed; /* Makes the background image stay fixed while scrolling */
-        }        
-        .card {
-            background: rgba(255, 255, 255, 0.1); /* Light transparent white for glass effect */
-            padding: 3rem; /* Increased padding */
-            border-radius: 15px;
-            backdrop-filter: blur(10px); /* Makes the background blurry */
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* Increased shadow for depth */
-            max-width: auto; /* Increased max width */
-            width: 100%; /* Full width on smaller screens */
-        }
+    <link rel="stylesheet" type="text/css" href="css/signup.css">
 
-        /* Header styling */
-        .card-header h5 {
-            color: #ffffff;
-            font-size: 1.5rem;
-        }
-        .form-group label {
-            color: #ffffff;
-            font-weight: bold;
-            font-size: 1rem; /* Increased font size */
-        }
-
-        .form-control {
-            background: rgba(255, 255, 255, 0.2); /* Semi-transparent for glass effect */
-            border: none;
-            border-radius: 8px;
-            color: #ffffff;
-            padding: 1rem; /* Increased padding */
-            font-size: 1.1rem; /* Increased font size */
-        }
-
-        .form-control::placeholder {
-            color: rgba(255, 255, 255, 0.7);
-        }
-
-        /* Submit button styling */
-        .btn-primary {
-            width: 100%;
-            padding: 1rem; /* Increased padding */
-            background-color: var(--bs-primary);
-            color: #ffffff;
-            font-weight: bold;
-            border-radius: 8px;
-            border: none;
-            cursor: pointer;
-            transition: background 0.3s ease;
-            margin-top: 1.5rem; /* Increased margin */
-        }
-
-        .btn-primary:hover {
-            background-color: #e0e0e0;
-        }
-
-        /* Forgot password link */
-        .float-end {
-            color: #ffffff;
-            font-size: 1rem; /* Increased font size */
-            text-decoration: underline;
-            margin-top: 1.5rem; /* Increased margin */
-        }
-
-        .float-end:hover {
-            color: #ccc;
-        }
-
-        /* Session message styling */
-        .alert-success {
-            background-color: rgba(0, 128, 0, 0.7);
-            backdrop-filter: blur(10px);
-            background: rgba(255, 255, 255, 0.1);
-            color: #ffffff;
-            border: none;
-            padding: 10px;
-            text-align: center;
-            margin-bottom: 1rem;
-            border-radius: 8px;
-        } 
-    
-    </style>
 </head>
 <body>
     <div class="py-5">
@@ -324,6 +225,7 @@ function validateForm() {
     var email = document.forms["signupForm"]["email"].value;
     var contact_pattern = /^09\d{9}$/; // Starts with 09 and followed by 9 digits
     var email_pattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/; // Basic email pattern
+    var password_pattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/; // At least 8 characters, one uppercase, one lowercase, one number, and one special character
 
     if (!contact_pattern.test(contact_number)) {
         alert("Contact number must start with 09 and be 11 digits long.");
@@ -335,6 +237,17 @@ function validateForm() {
         return false; // Prevents form submission
     }
 
+    if(!password_pattern.test(password)) {
+        alert("Password must be at least 8 characters long, include uppercase, lowercase, a number, and a special character.");
+        return false; // Prevents form submission
+    }
+
+    if(password_pattern.test(password) && password !== confirm_password) {
+        alert("Passwords do not match.");
+        return false; // Prevents form submission
+    }
+
+    
     return true; // Allow form submission
 }
 </script>

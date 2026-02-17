@@ -87,9 +87,10 @@ if (isset($_POST['deleteReqsNo'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="../css/style.css">
 </head>
 <body>
-<ul class="nav nav-tabs justify-content-end mt-3" id="navTabs">
+<ul class="nav nav-tabs justify-content-end mt-3 " id="navTabs">
     <li class="nav-item active">
         <a class="nav-link fs-5" href="vservice_customer.php">Requested Services</a>
     </li>
@@ -126,49 +127,49 @@ if (isset($_POST['deleteReqsNo'])) {
                                         </thead>
                                         <tbody>
                                         <?php
-if (isset($_SESSION['email']) && isset($_SESSION['userId']) && isset($_SESSION['custId'])) {
-    $userId = $_SESSION['userId'];
-    $email = $_SESSION['email'];
-    $custId = $_SESSION['custId'];
+                                            if (isset($_SESSION['email']) && isset($_SESSION['userId']) && isset($_SESSION['custId'])) {
+                                                $userId = $_SESSION['userId'];
+                                                $email = $_SESSION['email'];
+                                                $custId = $_SESSION['custId'];
 
-    // Get the information from the orders with descending order
-    $vreqServ_query = "SELECT s.branch, r.*
-                        FROM reqserv r
-                        JOIN staffs s ON r.staffId = s.staffId 
-                        WHERE r.userId = ? 
-                        AND r.servStatus = 'Pending Request'AND r.servArchive = '0'
-    ORDER BY r.reqserv DESC";
-    $stmt_vServ = $con->prepare($vreqServ_query);
-    $stmt_vServ->bind_param("i", $userId);
-    $stmt_vServ->execute();
-    $result_vServ = $stmt_vServ->get_result();
+                                                // Get the information from the orders with descending order
+                                                $vreqServ_query = "SELECT s.branch, r.*
+                                                                    FROM reqserv r
+                                                                    JOIN staffs s ON r.staffId = s.staffId 
+                                                                    WHERE r.userId = ? 
+                                                                    AND r.servStatus = 'Pending Request'AND r.servArchive = '0'
+                                                ORDER BY r.reqserv DESC";
+                                                $stmt_vServ = $con->prepare($vreqServ_query);
+                                                $stmt_vServ->bind_param("i", $userId);
+                                                $stmt_vServ->execute();
+                                                $result_vServ = $stmt_vServ->get_result();
 
-    if ($result_vServ->num_rows > 0) {
-        while ($row = $result_vServ->fetch_assoc()) {                                                                                                                      
-            ?>
-            <tr class="text-center">
-                <td data-label="Request Number"><?php echo $row['reqserv']; ?></td>                                                                    
-                <td data-label="Service Type"><?php echo $row['servType']; ?></td>
-                <td data-label="Description"><?php echo $row['description']; ?></td>   
-                <td data-label="Payment Option"><?php echo $row['payOpt']; ?></td> 
-                <td data-label="Payment Type"><?php echo $row['paymentType']; ?></td>
-                <td data-label="Rate"><?php echo $row['urgent']; ?></td>
-                <td data-label="Total Amount"><?php echo $row['totalAmount']; ?></td>  
-                <td data-label="Payable"><?php echo $row['payable']; ?></td> 
-                <td data-label="Branch"><?php echo $row['branch']; ?></td>    
-                <td data-label="Request Date"><?php echo $row['createDate']; ?></td>
-                <td data-label="Delete">
-                    <button type="button" class="btn btn-danger d-flex align-items-center" data-bs-toggle="modal" data-bs-target="#deleteModal" data-reqserv="<?php echo $row['reqserv']; ?>" data-description="<?php echo $row['description']; ?>">
-    <i class="bi bi-trash3 me-2"></i>
-    <span>Delete</span>
-</button>
-            </td>                                                           
-            </tr>
-            <?php 
-        }
-    } 
-}
-?>
+                                                if ($result_vServ->num_rows > 0) {
+                                                    while ($row = $result_vServ->fetch_assoc()) {                                                                                                                      
+                                                        ?>
+                                                        <tr class="text-center">
+                                                            <td data-label="Request Number"><?php echo $row['reqserv']; ?></td>                                                                    
+                                                            <td data-label="Service Type"><?php echo $row['servType']; ?></td>
+                                                            <td data-label="Description"><?php echo $row['description']; ?></td>   
+                                                            <td data-label="Payment Option"><?php echo $row['payOpt']; ?></td> 
+                                                            <td data-label="Payment Type"><?php echo $row['paymentType']; ?></td>
+                                                            <td data-label="Rate"><?php echo $row['urgent']; ?></td>
+                                                            <td data-label="Total Amount"><?php echo $row['totalAmount']; ?></td>  
+                                                            <td data-label="Payable"><?php echo $row['payable']; ?></td> 
+                                                            <td data-label="Branch"><?php echo $row['branch']; ?></td>    
+                                                            <td data-label="Request Date"><?php echo $row['createDate']; ?></td>
+                                                            <td data-label="Delete">
+                                                                <button type="button" class="btn btn-danger d-flex align-items-center" data-bs-toggle="modal" data-bs-target="#deleteModal" data-reqserv="<?php echo $row['reqserv']; ?>" data-description="<?php echo $row['description']; ?>">
+                                                <i class="bi bi-trash3 me-2"></i>
+                                                <span>Delete</span>
+                                            </button>
+                                                        </td>                                                           
+                                                        </tr>
+                                                        <?php 
+                                                    }
+                                                } 
+                                            }
+                                            ?>
                                         </tbody>
                                     </table>
                                 </div>    
@@ -236,7 +237,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
         // Add a hover effect using JavaScript
         link.addEventListener('mouseover', function() {
-            link.style.backgroundColor = '#007bff';
+            link.style.backgroundColor = '#287392';
             link.style.color = 'white';
         });
 
@@ -250,7 +251,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // Function to apply the click styles (background and text color change)
     function applyClickStyle(link) {
-        link.style.backgroundColor = '#28a745'; // Green background
+        link.style.backgroundColor = '#287392'; // Green background
         link.style.color = 'white'; // White text
         //link.style.transition = 'background-color 0.2s, color 0.2s'; // Optional: smooth transition
     }
