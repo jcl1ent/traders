@@ -1,8 +1,52 @@
 <?php
-session_start(); // Start the session
-include("dbcon.php"); // Include the database connection
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+include_once("dbcon.php");
 
-date_default_timezone_set('Asia/Manila'); // Set timezone to Philippines
+date_default_timezone_set('Asia/Manila');
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
+require_once 'vendor/phpmailer/phpmailer/src/Exception.php';
+require_once 'vendor/phpmailer/phpmailer/src/PHPMailer.php';
+require_once 'vendor/phpmailer/phpmailer/src/SMTP.php';
+
+if (!function_exists('sendemail_verify')) {
+    function sendemail_verify($firstname, $email, $verify_token) {
+        $mail = new PHPMailer(true);
+        $mail->SMTPDebug = 0; // Set to 2 to enable debug output
+        $mail->isSMTP();                                             // Send using SMTP
+        $mail->Host       = 'smtp.gmail.com';  
+        $mail->SMTPAuth   = true;
+        $mail->Username   = 'ronyxtrading@gmail.com';                     // SMTP username
+        $mail->Password   = 'hsmrppgadmxbyjnx';
+        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;            // Enable implicit TLS encryption
+        $mail->Port       = 587;
+
+        $mail->setFrom('ronyxtrading@gmail.com', 'Ronyx Trading');
+        $mail->addAddress($email, $firstname);
+
+        $mail->isHTML(true);                                  // Set email format to HTML
+        $mail->Subject = 'Email Verification';
+
+        $email_template = "
+            <h2>You have registered with Ronyx Trading</h2>
+            <h4>Verify your email address to login using the link below:</h4>
+            <br><br>
+            <a href='http://localhost:3000/traders/verifyemail.php?token=$verify_token'>Verify Email</a>";
+        $mail->Body = $email_template;
+
+        try {
+            $mail->send();
+        // echo 'Email has been sent';
+        } catch (Exception $e) {
+        // echo 'Message could not be sent.';
+        // echo 'Mailer Error: ' . $mail->ErrorInfo;
+        }
+    }
+}
 
 if (isset($_POST['login_btn'])) {
     if (!empty(trim($_POST['email'])) && !empty(trim($_POST['password']))) {
@@ -38,7 +82,6 @@ if (isset($_POST['login_btn'])) {
                     $_SESSION['userId'] = $row['userId'];
                     $_SESSION['status'] = "Login Successful";
 
-                    // Close the statement after fetching the result
                     $stmt->close();
 
                     // Update user status to "online"
@@ -55,7 +98,7 @@ if (isset($_POST['login_btn'])) {
                     $stmt->execute();
                     $stmt->close();
 
-                    // Redirect to respective dashboards
+                    // Redirecting to dashboards
                     switch ($row['role']) {
                         case 'admin':
                             header("Location: admin/admin_dashboard.php");
@@ -70,6 +113,7 @@ if (isset($_POST['login_btn'])) {
                     exit();
                 } else {
                     $_SESSION['status'] = "Please verify your email first.";
+                    sendemail_verify($row['fullName'], $email, $row['verify_token']);
                 }
             } else {
                 $_SESSION['status'] = "Invalid email or password.";

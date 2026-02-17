@@ -33,7 +33,7 @@ function sendemail_verify($firstname, $email, $verify_token) {
         <h2>You have registered with Ronyx Trading</h2>
         <h4>Verify your email address to login using the link below:</h4>
         <br><br>
-        <a href='http://localhost/traders_testing/verifyemail.php?token=$verify_token'>Verify Email</a>";
+        <a href='http://localhost:3000/traders/verifyemail.php?token=$verify_token'>Verify Email</a>";
     $mail->Body = $email_template;
 
     try {

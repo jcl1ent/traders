@@ -1,8 +1,10 @@
 <?php
  // Start the session
-include("dbcon.php");
-session_abort();
-include("logincode.php");
+ if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+include(__DIR__ . "/../dbcon.php");
+include(__DIR__ . "/../logincode.php");
 
 if (isset($_SESSION['userId'])) {
   $userId = $_SESSION['userId'];
@@ -91,7 +93,7 @@ if (isset($_GET['page_title'])) {
         case 'tickets':
             $page_title = 'Raise Ticket';
             break;
-            case 'tickets':
+            case 'transDoc':
               $page_title = 'Transaction Documents';
               break;
         case 'view service':
@@ -171,20 +173,20 @@ if (isset($_GET['page_title'])) {
 <!-- Sidebar -->
 <div class="w3-sidebar w3-bar-block w3-border-right oval-button" style="display:none" id="mySidebar">
   <button onclick="w3_close()" class="w3-bar-item w3-small w3-red oval-button">Close &times;</button>
-  <a href="dashboard.php" class="w3-bar-item w3-button w3-blue-grey oval-button"> <i class="bi bi-speedometer"></i> Dashboard</a>
-  <a href="customerServiceList.php" class="w3-bar-item w3-button w3-blue-grey oval-button"><i class="bi bi-gear-wide-connected"></i> Services</a>
-  <a href="services_customer.php" class="w3-bar-item w3-button w3-blue-grey oval-button"><i class="bi bi-tools"></i> Request Service</a>
-  <a href="products_customer.php" class="w3-bar-item w3-button w3-blue-grey oval-button"><i class="bi bi-box-fill"></i> Products</a>
-  <a href="payments_customer.php" class="w3-bar-item w3-button w3-blue-grey oval-button"><i class="bi bi-credit-card-fill"></i> Payments</a>
-  <a href="tickets_customer.php" class="w3-bar-item w3-button w3-blue-grey oval-button"><i class="bi bi-ticket-fill"></i> Raise Ticket</a>
+  <a href="/traders/customer/dashboard.php" class="w3-bar-item w3-button w3-blue-grey oval-button"> <i class="bi bi-speedometer"></i> Dashboard</a>
+  <a href="/traders/customer/customerServiceList.php" class="w3-bar-item w3-button w3-blue-grey oval-button"><i class="bi bi-gear-wide-connected"></i> Services</a>
+  <a href="/traders/customer/services_customer.php" class="w3-bar-item w3-button w3-blue-grey oval-button"><i class="bi bi-tools"></i> Request Service</a>
+  <a href="/traders/customer/products_customer.php" class="w3-bar-item w3-button w3-blue-grey oval-button"><i class="bi bi-box-fill"></i> Products</a>
+  <a href="/traders/customer/payments_customer.php" class="w3-bar-item w3-button w3-blue-grey oval-button"><i class="bi bi-credit-card-fill"></i> Payments</a>
+  <a href="/traders/customer/tickets_customer.php" class="w3-bar-item w3-button w3-blue-grey oval-button"><i class="bi bi-ticket-fill"></i> Raise Ticket</a>
   <!-- Dropdown for Statuses -->
   <a href="javascript:void(0)" class="w3-bar-item w3-button w3-blue-grey oval-button" onclick="toggleDropdown()"><i class="bi bi-clipboard2-data-fill"></i> Statuses &#9662;</a>
   <div id="statusDropdown" class="w3-hide w3-white w3-bar-block">
-    <a href="vservice_customer.php" class="w3-bar-item w3-button w3-blue-grey oval-button"><i class="bi bi-gear-fill"></i> View Service</a>
-    <a href="vorder_customer.php" class="w3-bar-item w3-button w3-blue-grey oval-button"><i class="bi bi-bag-fill"></i> View Order</a>
-    <a href="vticket_customer.php" class="w3-bar-item w3-button w3-blue-grey oval-button"><i class="bi bi-ticket-perforated-fill"></i> View Ticket</a>
+    <a href="/traders/customer/vservice_customer.php" class="w3-bar-item w3-button w3-blue-grey oval-button"><i class="bi bi-gear-fill"></i> View Service</a>
+    <a href="/traders/customer/vorder_customer.php" class="w3-bar-item w3-button w3-blue-grey oval-button"><i class="bi bi-bag-fill"></i> View Order</a>
+    <a href="/traders/customer/vticket_customer.php" class="w3-bar-item w3-button w3-blue-grey oval-button"><i class="bi bi-ticket-perforated-fill"></i> View Ticket</a>
   </div>
-  <a href="customer_transDoc.php" class="w3-bar-item w3-button w3-blue-grey oval-button"><i class="bi bi-file-earmark-text-fill"></i> Transaction Documents</a>
+  <a href="/traders/customer/customer_transDoc.php" class="w3-bar-item w3-button w3-blue-grey oval-button"><i class="bi bi-file-earmark-text-fill"></i> Transaction Documents</a>
   <!-- <br><br><br><br><br>
   <a href="logout.php" class="w3-bar-item w3-button w3-blue-grey oval-button"><i class="bi bi-box-arrow-left"></i> Logout</a> -->
 </div>
@@ -236,9 +238,9 @@ if (isset($_GET['page_title'])) {
       </button>
       
       <ul class="dropdown-menu dropdown-menu-end">
-        <li><a class="dropdown-item" href="userDetails.php?userId=<?php echo $_SESSION['userId']; ?>">User Details</a></li>
-        <li><a class="dropdown-item" href="updateUserDetails.php?userId=<?php echo $_SESSION['userId']; ?>">Edit Profile</a></li>
-        <li><a class="dropdown-item" href="logout.php">Logout</a></li>
+        <li><a class="dropdown-item" href="/traders/userDetails.php?userId=<?php echo $_SESSION['userId']; ?>">User Details</a></li>
+        <li><a class="dropdown-item" href="/traders/customer/updateUserDetails.php?userId=<?php echo $_SESSION['userId']; ?>">Edit Profile</a></li>
+        <li><a class="dropdown-item" href="/traders/logout.php">Logout</a></li>
       </ul>
 </div>
 

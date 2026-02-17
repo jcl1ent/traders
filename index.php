@@ -1,9 +1,9 @@
 <?php
-$page_title = "Home Page";
+session_start();
+$page_title = "Ronyx Trading";
 include("includes/header.php"); 
 include("includes/navbar.php");
 include("dbcon.php"); // Your database connection file
-include("logincode.php");
 if (isset($_POST['login_btn'])) {   
     $email = $_POST['email'];
     $password = $_POST['password'];
@@ -39,13 +39,13 @@ if (isset($_POST['login_btn'])) {
             //exit();
         } else {
             // Password is incorrect
-            $_SESSION['status'] = "Invalid email or password.";
+            $_SESSION['status'] = "Invalid password.";
             header("Location: index.php");
             exit();
         }
     } else {
         // Email not found
-        $_SESSION['status'] = "Invalid email or password.";
+        $_SESSION['status'] = "Invalid email.";
         header("Location: index.php");
         exit();
     }

@@ -1,6 +1,9 @@
 <?php
-$page_title = "Dashboard";
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 include("../logincode.php");
+$page_title = "Dashboard";
 include("sidebar.php");
 include("../dbcon.php");
 include("../includes/header.php");
@@ -62,7 +65,7 @@ if (isset($_SESSION['email']) && isset($_SESSION['custId'])  && isset($_SESSION[
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
-<body>
+<body class="bg-success text-dark bg-opacity-10">
     <div class="py-5">
         <div class="container">
             <div class="row d-flex justify-content-around ">
@@ -211,7 +214,11 @@ if (isset($_SESSION['email']) && isset($_SESSION['custId'])  && isset($_SESSION[
                                     INNER JOIN services ON reqserv_service.servCode = services.servCode
                                     INNER JOIN reqserv ON reqserv_service.reqserv = reqserv.reqserv
                                     WHERE reqserv.servStatus = 'Service Completed'
-                                    GROUP BY reqserv_service.servName
+                                    GROUP BY reqserv_service.servName,
+                                             services.servImg,
+                                             services.servName,
+                                             services.rateService,
+                                             reqserv.servStatus
                                     ORDER BY serv_trend DESC LIMIT 1";
                     $stmt_Tserv = $con->prepare($Tserv_query);
                     $stmt_Tserv->execute();
@@ -269,7 +276,9 @@ if (isset($_SESSION['email']) && isset($_SESSION['custId'])  && isset($_SESSION[
                                     INNER JOIN orders ON order_items.orderNo = orders.orderNo
                                     INNER JOIN products ON order_items.prodNo = products.prodNo
                                     WHERE orders.status = 'Order Delivered'
-                                    GROUP BY order_items.prodName
+                                    GROUP BY order_items.prodName,
+                                             products.prodImg,
+                                             products.prodprice
                                     ORDER BY total_quantity DESC LIMIT 1";
                     $stmt_Tprod = $con->prepare($Tprod_query);
                     $stmt_Tprod->execute();

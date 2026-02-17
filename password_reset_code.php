@@ -28,23 +28,23 @@ function send_password_reset($get_fullName, $get_email,$token){
         <h2>Hello</h2>
         <h4>You are receiving this email because we receive a Password Reset Request for your email.</h4>
         <br><br>
-        <a href='http://localhost/traders_testing/password_change.php?token=$token&email=$get_email'>Reset Password</a>";
+        <a href='http://localhost:3000/traders/password_change.php?token=$token&email=$get_email'>Reset Password</a>";
 
     $mail->Body = $email_template;
 
     try {
         $mail->send();
-        echo 'Email has been sent';
+        // echo 'Email has been sent';
     } catch (Exception $e) {
-        echo 'Message could not be sent.';
-        echo 'Mailer Error: ' . $mail->ErrorInfo;
+        // echo 'Message could not be sent.';
+        // echo 'Mailer Error: ' . $mail->ErrorInfo;
     }
 }
 if(isset($_POST['password_reset'])){
     $email = mysqli_real_escape_string($con, $_POST['email']);
     $token = md5(rand());
 
-    $check_email = "SELECT email FROM users WHERE email='$email' LIMIT 1";
+    $check_email = "SELECT email, fullName FROM users WHERE email='$email' LIMIT 1";
     $check_email_run = mysqli_query($con, $check_email);
 
     if(mysqli_num_rows($check_email_run) > 0){
