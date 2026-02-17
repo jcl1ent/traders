@@ -44,6 +44,7 @@ if (isset($_GET['reqserv'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo $page_title; ?></title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="../css/style.css">
 </head>
 <body>
     <ul class="nav nav-tabs justify-content-end mt-3" id="navTabs">
@@ -202,7 +203,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
         // Add a hover effect using JavaScript
         link.addEventListener('mouseover', function() {
-            link.style.backgroundColor = '#007bff';
+            link.style.backgroundColor = '#287392';
             link.style.color = 'white';
         });
 
@@ -216,9 +217,8 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // Function to apply the click styles (background and text color change)
     function applyClickStyle(link) {
-        link.style.backgroundColor = '#28a745'; // Green background
+        link.style.backgroundColor = '#287392'; // Green background
         link.style.color = 'white'; // White text
-        //link.style.transition = 'background-color 0.2s, color 0.2s'; // Optional: smooth transition
     }
 
     // Function to reset styles when the tab is no longer active

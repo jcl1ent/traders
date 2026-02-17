@@ -1,0 +1,67 @@
+
+  .oval-button {
+    border-radius: 10px;
+    display: inline-block;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 10px;
+  }
+
+  .oval-button:hover {
+    color: inherit;
+  }
+
+  .custom-btn {
+    background-color: #2F4156 !important;
+    color: white !important;
+  }
+
+  .custom-btn:hover{
+    background-color: #b7cbda !important;
+    color: #2F4156 !important;
+  }
+  
+  .bg {
+    background-color: #F6F2EE !important;
+  }
+
+  .header-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Ensures both button and heading are spaced out */
+    padding: 10px 20px;
+    background-color: #2F4156;
+    transition: all 0.3s ease;
+  }
+
+  .header-container h1 {
+    margin: 0;
+    text-align: center;
+    flex-grow: 1; /* Ensures h1 takes up remaining space */
+    color: white;
+  }
+
+  .header-container button {
+    flex-shrink: 0; /* Prevents the button from shrinking */
+    background-color: transparent !important;
+    border: none !important;
+    transition: all 0.3s ease;
+    color: white !important;
+  }
+
+  .header-container button:hover {
+    background-color: rgba(255, 255, 255, 0.2) !important;
+  }
+
+  /* Styling for the username display */
+  .username {
+    position: relative;
+    font-size: 16px;
+    color: white;
+    white-space: nowrap; /* Prevents text from wrapping */
+    overflow: hidden; /* Ensures text that overflows is hidden */
+    text-overflow: ellipsis; /* Adds ellipsis (...) for overflow text */
+    max-width: 150px; /* Set a maximum width for the button */
+    display: inline-block; /* Ensure it behaves like a block */
+    vertical-align: middle; /* Center aligns the text vertically */
+}
