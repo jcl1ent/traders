@@ -1,9 +1,9 @@
 <?php
 $page_title = "Admin Change Password";
-include("../logincode.php");
-include("dbcon.php");
-include("../sidebar_admin.php");
-include("../includes/header.php");
+include(__DIR__ . "/../logincode.php");
+include(__DIR__ . "/../dbcon.php");
+include(__DIR__ . "/../sidebar_admin.php");
+include(__DIR__ . "/../includes/header.php");
 
 if (isset($_POST['UpdatePass'])) {
     $userId = $_GET['userId'];

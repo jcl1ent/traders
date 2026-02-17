@@ -1,7 +1,7 @@
 <?php
-include("../dbcon.php");
+include(__DIR__ . "/../dbcon.php");
 session_abort();
-include("../logincode.php");
+include(__DIR__ . "/../logincode.php");
 
 if (isset($_SESSION['userId'])) {
   $userId = $_SESSION['userId'];
@@ -165,18 +165,18 @@ if (isset($_GET['page_tile'])) {
 <!-- Sidebar -->
 <div class="w3-sidebar w3-bar-block w3-border-right oval-button" style="display:none" id="mySidebar">
   <button onclick="w3_close()" class="w3-bar-item w3-small w3-red oval-button">Close &times;</button>
-  <a href="staff_dashboard.php" class="w3-bar-item w3-button w3-blue-grey oval-button"> <i class="bi bi-speedometer"></i> Dashboard</a>
-  <a href="staff_services.php" class="w3-bar-item w3-button w3-blue-grey oval-button"><i class="bi bi-gear-wide-connected"></i> Services</a>
-  <a href="staff_pendingserv.php" class="w3-bar-item w3-button w3-blue-grey oval-button"><i class="bi bi-tools"></i> Service Requests</a>
-  <a href="staff_products.php" class="w3-bar-item w3-button w3-blue-grey oval-button"><i class="bi bi-box-fill"></i> Products</a>
-  <a href="staff_orders.php" class="w3-bar-item w3-button w3-blue-grey oval-button"><i class="bi bi-truck"></i> Orders</a>
-  <a href="staff_paymentsService.php" class="w3-bar-item w3-button w3-blue-grey oval-button"><i class="bi bi-currency-dollar"></i> Payments</a>
-  <a href="staff_tickets.php" class="w3-bar-item w3-button w3-blue-grey oval-button"><i class="bi bi-ticket-detailed-fill"></i> Inquiry Ticket</a>
-  <a href="staff_custAccounts.php" class="w3-bar-item w3-button w3-blue-grey oval-button"><i class="bi bi-person-lines-fill"></i> Customer Accounts</a>
-  <a href="staff_feedbacks.php" class="w3-bar-item w3-button w3-blue-grey oval-button"><i class="bi bi-chat-left-text-fill"></i> Feedbacks</a>
-  <a href="staff_manpower.php" class="w3-bar-item w3-button w3-blue-grey oval-button"><i class="bi bi-person-gear"></i> Manpower</a>
-  <a href="staff_SalesReport.php" class="w3-bar-item w3-button w3-blue-grey oval-button"><i class="bi bi-bar-chart-line-fill"></i> Sales Reports</a>
-  <a href="staff_transDocs.php" class="w3-bar-item w3-button w3-blue-grey oval-button"><i class="bi bi-file-earmark-text-fill"></i> Transaction Documents</a>
+  <a href="/traders/staff/staff_dashboard.php" class="w3-bar-item w3-button w3-blue-grey oval-button"> <i class="bi bi-speedometer"></i> Dashboard</a>
+  <a href="/traders/staff/staff_services.php" class="w3-bar-item w3-button w3-blue-grey oval-button"><i class="bi bi-gear-wide-connected"></i> Services</a>
+  <a href="/traders/staff/staff_pendingserv.php" class="w3-bar-item w3-button w3-blue-grey oval-button"><i class="bi bi-tools"></i> Service Requests</a>
+  <a href="/traders/staff/staff_products.php" class="w3-bar-item w3-button w3-blue-grey oval-button"><i class="bi bi-box-fill"></i> Products</a>
+  <a href="/traders/staff/staff_orders.php" class="w3-bar-item w3-button w3-blue-grey oval-button"><i class="bi bi-truck"></i> Orders</a>
+  <a href="/traders/staff/staff_paymentsService.php" class="w3-bar-item w3-button w3-blue-grey oval-button"><i class="bi bi-currency-dollar"></i> Payments</a>
+  <a href="/traders/staff/staff_tickets.php" class="w3-bar-item w3-button w3-blue-grey oval-button"><i class="bi bi-ticket-detailed-fill"></i> Inquiry Ticket</a>
+  <a href="/traders/staff/staff_custAccounts.php" class="w3-bar-item w3-button w3-blue-grey oval-button"><i class="bi bi-person-lines-fill"></i> Customer Accounts</a>
+  <a href="/traders/staff/staff_feedbacks.php" class="w3-bar-item w3-button w3-blue-grey oval-button"><i class="bi bi-chat-left-text-fill"></i> Feedbacks</a>
+  <a href="/traders/staff/staff_manpower.php" class="w3-bar-item w3-button w3-blue-grey oval-button"><i class="bi bi-person-gear"></i> Manpower</a>
+  <a href="/traders/staff/staff_SalesReport.php" class="w3-bar-item w3-button w3-blue-grey oval-button"><i class="bi bi-bar-chart-line-fill"></i> Sales Reports</a>
+  <a href="/traders/staff/staff_transDocs.php" class="w3-bar-item w3-button w3-blue-grey oval-button"><i class="bi bi-file-earmark-text-fill"></i> Transaction Documents</a>
   <!-- Dropdown for Statuses -->
   
   <br><br><br><br>
@@ -227,9 +227,9 @@ if (isset($_GET['page_tile'])) {
         <span class="username"><?php echo $firstName; ?></span>
       </button>
       <ul class="dropdown-menu dropdown-menu-end">
-        <li><a class="dropdown-item" href="userDetails.php?userId=<?php echo $_SESSION['userId']; ?>">User Details</a></li>
-        <li><a class="dropdown-item" href="updateStaffDetails.php?userId=<?php echo $_SESSION['userId']; ?>">Edit Profile</a></li>
-        <li><a class="dropdown-item" href="logout.php">Logout</a></li>
+        <li><a class="dropdown-item" href="/traders/userDetails.php?userId=<?php echo $_SESSION['userId']; ?>">User Details</a></li>
+        <li><a class="dropdown-item" href="/traders/staff/updateStaffDetails.php?userId=<?php echo $_SESSION['userId']; ?>">Edit Profile</a></li>
+        <li><a class="dropdown-item" href="/traders/logout.php">Logout</a></li>
       </ul>
 </div>
 

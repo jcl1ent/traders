@@ -1,4 +1,7 @@
 <?php
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 $page_title = "Customer Services";
 include("../logincode.php");
 include("sidebar.php");
@@ -14,15 +17,12 @@ include("../includes/header.php");
 </head>
 <body>
     <div class="container-fluid">
-        <div class="col">
-            <div class="row">
-                <div class="col">
-                    
-                    <div class="card">
-                            <div class="card-body">
-                                <div class="row shadow">
+        <div class="row bg-success text-dark bg-opacity-10">                   
+                <div class="card ">
+                        <div class="card-body ">
+                            <div class="row shadow ">
                                     <!-- Search Form -->
-                            <form method="GET" action="admin_services.php" class="mb-4">
+                            <form method="GET" action="customerServiceList.php" class="mb-4">
                                 <div class="input-group input-group-sm">
                                     <input 
                                         type="text" 
@@ -93,9 +93,9 @@ include("../includes/header.php");
                                             $imageData = base64_encode($service['servImg']);
                                             ?>
                                     <div class="col-lg-4 col-md-6 col-sm-12 p-2">
-                                        <div class="border border-dark rounded p-3">
+                                        <div class="border border-dark rounded p-3 bg-success text-dark bg-opacity-10">
                                             <!-- Added border and padding to each card -->
-                                            <img src="data:image/jpeg;base64,<?= $imageData ?>" class="d-block mx-auto img-fluid" style="height: 150px; object-fit: cover;">  
+                                            <img src="data:image/jpeg;base64,<?= $imageData ?>" class="d-block mx-auto img-fluid " style="height: 150px; object-fit: cover;">  
                                                     <div class="d-flex flex-column align-items-center text-center mt-2">
                                                         <p>Service ID: <span class="fw-bold"><?= $service['servCode'] ?></span></p>
                                                         <p>Category: <span class="fw-bold"><?= htmlspecialchars($service['servCategory']); ?></span></p>
@@ -116,7 +116,5 @@ include("../includes/header.php");
                     </div>   
                 </div>
             </div>
-        </div>
-    </div>
 </body>
 </html>

@@ -180,8 +180,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="style.css">
 </head>
-<body>
-    <div class="container mt-4">
+<body class="bg-success text-dark bg-opacity-10">
+    <div class="container mt-4 mb-4">
         <div class="card">
             <div class="card-body">
                 <form action="" method="POST" class="row g-3">
@@ -189,7 +189,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
                     <input type="hidden" name="servCode" id="servCode" value="">
                     <input type="hidden" name="servType" id="servType" value="">
 
-                    <div class="col-12">
+                    <div class="col-12 bg-secondary bg-gradient p-2 text-dark bg-opacity-10">
                         <label for="ServiceType" class="form-label">Service Category</label>
                         <select class="form-select" name="servCategory" id="servCategory" onchange="updateServices()">
                             <option value="">Select Service Category</option>
@@ -200,15 +200,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
                             <option value="Mechanical Parts">Mechanical Parts</option>
                             <option value="Dynamic Balancing and In-Place Services">Dynamic Balancing and In-Place Services</option>
                         </select>
-                    </div>
-
-                    <div class="col-12">
+                        <div class="col-12 ">
                         <label for="services" class="form-label">Services</label>
                         <div id="services" name="services">
                         </div>
                     </div>
+                    </div>
 
-                    <div class="col-12">
+                    
+
+                    <div class="col-12 bg-secondary bg-gradient p-2 text-dark bg-opacity-10">
                         <h5>Selected Services</h5>
                         <table class="table" id="selectedServicesTable">
                             <thead>
@@ -221,22 +222,22 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
                             <tbody>
                             </tbody>
                         </table>
-                    </div>
-
-                    <div class="col-md-6">
+                        <div class="col-md-6">
                         <label for="urgent" class="form-label">Urgent</label>
                         <div class="form-check">
                             <input type="checkbox" class="form-check-input" id="urgent" name="urgent" value="Yes">
                             <label class="form-check-label" for="urgent">Mark as Urgent</label>
                         </div>
                     </div>
+                    </div>
 
-                    <div class="col-12">
+                    
+                    <div class="col-12 bg-secondary bg-gradient p-2 text-dark bg-opacity-10">
                         <label for="Description" class="form-label">Description</label>
                         <textarea class="form-control" name="description" rows="3"></textarea>
                     </div>
 
-                    <div class="col-3">
+                    <div class="col-3 bg-secondary bg-gradient p-2 text-dark bg-opacity-10">
                         <label for="PaymentMethod" class="form-label">Payment Method</label>
                         <select class="form-select" name="payOpt" required>
                             <option value="" selected disabled>Payment Method</option>
@@ -245,7 +246,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
                             <option value="Bank Transfer">Bank Transfer</option>
                         </select>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-3 bg-secondary bg-gradient p-2 text-dark bg-opacity-10">
                         <label for="PaymentType" class="form-label">Payment Type</label>
                         <select class="form-select" name="paymentType" id="paymentType" onchange="calculateAmounts()" required>
                             <option value="" selected disabled>Payment Type</option>
@@ -254,21 +255,21 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
                         </select>
                     </div>
 
-                    <div class="col-md-3">
+                    <div class="col-md-3 bg-secondary bg-gradient p-2 text-dark bg-opacity-10">
                         <label for="Payable" class="form-label">Payable</label>
                         <input type="number" class="form-control" name="payable" id="payable" readonly>
                     </div>
 
-                    <div class="col-md-3">
+                    <div class="col-md-3 bg-secondary bg-gradient p-2 text-dark bg-opacity-10">
                         <label for="totalAmount" class="form-label">Total Amount</label>
                         <input type="number" class="form-control" name="totalAmount" id="totalAmount" readonly>
                     </div>
 
-                    <div class="col-md-9">
+                    <div class="col-md-9 bg-secondary bg-gradient p-2 text-dark bg-opacity-10">
                         <label for="address" class="form-label">Address</label>
                         <input type="text" class="form-control" name="address" value="<?php echo htmlspecialchars($address); ?>">
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-3 bg-secondary bg-gradient p-2 text-dark bg-opacity-10">
                         <label for="staffId" class="form-label">Branch</label>
                         <select class="form-select" name="staffId" required>
                             <option value="" selected disabled>Select Branch</option>
