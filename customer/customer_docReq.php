@@ -46,7 +46,7 @@ if (isset($_GET['delete']) && isset($_GET['ReqNo'])) {
 
     $deleteStmt->close();
     // Refresh the page to show updated requests
-    echo "<script>setTimeout(() => window.location.href = 'customer_docReq.php', 2000);</script>";
+    echo "<script>setTimeout(() => window.location.href = '" . url('customer/customer_docReq.php') . "', 2000);</script>";
 }
 ?>
 
@@ -91,7 +91,7 @@ if (isset($_GET['delete']) && isset($_GET['ReqNo'])) {
             <?php endif; ?>
         </tbody>
     </table>
-    <a href="customer_transDoc.php" class="btn btn-secondary mt-4">Back</a>
+    <a href="<?= url('customer/customer_transDoc.php') ?>" class="btn btn-secondary mt-4">Back</a>
 </div>  
 </body>
 </html>

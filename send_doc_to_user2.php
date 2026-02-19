@@ -238,7 +238,7 @@ if (isset($_GET['download'])) {
         </form>
     </div>
 
-    <a href="staff_folders.php" class="btn btn-secondary mt-4">Back</a>
+    <a href="<?= url('staff/staff_folders.php') ?>" class="btn btn-secondary mt-4">Back</a>
 </div>
 </body>
 </html>

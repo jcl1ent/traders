@@ -1,29 +1,33 @@
 <?php
-session_start();
-include("dbcon.php");
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+include("../dbcon.php");
+include_once __DIR__ . "/../config.php";
 
 if (isset($_SESSION['userId'])) {
-    $userId = $_SESSION['userId']; // Retrieve userId from session
+    $userId = $_SESSION['userId'];
 
     if (isset($_GET['prodNo'])) {
-        foreach ($_SESSION['cart'][$userId] as $key => $product) {
-            if ($product['prodNo'] == $_GET['prodNo']) {
-                unset($_SESSION['cart'][$userId][$key]); // Remove the product from the user's cart
-                break;
+        if (isset($_SESSION['cart'][$userId]) && is_array($_SESSION['cart'][$userId])) {
+            foreach ($_SESSION['cart'][$userId] as $key => $product) {
+                if ($product['prodNo'] == $_GET['prodNo']) {
+                    unset($_SESSION['cart'][$userId][$key]);
+                    break;
+                }
             }
+            // Reindex the cart array to prevent empty indexes
+            $_SESSION['cart'][$userId] = array_values($_SESSION['cart'][$userId]);
         }
 
-        // Reindex the cart array to prevent empty indexes
-        $_SESSION['cart'][$userId] = array_values($_SESSION['cart'][$userId]);
-
-        // Redirect after modifying the cart
-        header('Location: cart_customer.php');
-        exit(); // Ensure the script stops after the header redirect
+        // Redirect back to the cart page
+        header('Location: ' . url('customer/cart_customer.php'));
+        exit();
     } else {
         echo "Error: Product number is not set.";
     }
 } else {
-    echo "Error: userId is not set in the session.";
+    $_SESSION['status'] = "Session expired. Please log in again.";
+    header('Location: ' . url('index.php'));
     exit();
 }
-?>

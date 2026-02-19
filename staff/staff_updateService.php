@@ -53,7 +53,7 @@ if (isset($_POST['updateService'])) {
     
     if ($stmt->execute()) {
         echo "<script>alert('Service information updated successfully');</script>";
-        echo "<script>window.location.href='staff_services.php';</script>";
+        echo "<script>window.location.href='" . url('staff/staff_services.php') . "';</script>";
     } else {
         echo "<script>alert('Error updating service information');</script>";
     }
@@ -139,7 +139,7 @@ if (isset($_POST['updateService'])) {
                                 </div>
 
                                 <div class="d-flex justify-content-center m-3" style="gap: 10px;">
-                                    <a href="staff_services.php" class="btn btn-secondary">
+                                    <a href="<?= url('staff/staff_services.php') ?>" class="btn btn-secondary">
                                         <i class="bi bi-arrow-90deg-left"></i> Back 
                                     </a>
                                     <button type="submit" name="updateService" class="btn btn-primary">

@@ -88,7 +88,7 @@ if ($staffIdResult && mysqli_num_rows($staffIdResult) > 0) {
                                                         <td data-label="Total Amount"><?php echo $row['totalPrice']; ?></td>
                                                         <td data-label="Total Amount"><?php echo $row['orderDate']; ?></td>
                                                         <?php if($row['orderTrackNo'] == NULL){ ?>
-                                                        <td data-label="Tracking Number" style="width: 15%;"><a href="addTrackNo_staff.php?orderNo=<?php echo $row['orderNo']; ?>">Add Tracking Reference</a></td>
+                                                        <td data-label="Tracking Number" style="width: 15%;"><a href="<?= url('addTrackNo_staff.php?orderNo=' . urlencode($row['orderNo'])) ?>">Add Tracking Reference</a></td>
                                                         <?php } else { ?>
                                                             <td data-label="Tracking Number" style="width: 15%;">
                                                                 <a href="<?php echo htmlspecialchars($row['orderTrackNo']); ?>">
@@ -98,7 +98,7 @@ if ($staffIdResult && mysqli_num_rows($staffIdResult) > 0) {
                                                         <?php } ?>
                                                         <td data-label="Actions" class="d-flex justify-content-center" style="gap: 5px;">
                                                             <?php if($row['status'] == 'Declined'){ ?>
-                                                                <a href="staff_orderInfo.php?orderNo=<?php echo $row['orderNo']; ?>">
+                                                                <a href="<?= url('staff/staff_orderInfo.php?orderNo=' . urlencode($row['orderNo'])) ?>">
                                                                 <button type="button" class="btn btn-primary d-flex align-items-center">
                                                                 <i class="bi bi-arrow-right-circle me-2"></i>
                                                                 <span>Details</span>
@@ -106,13 +106,13 @@ if ($staffIdResult && mysqli_num_rows($staffIdResult) > 0) {
                                                                 </a>
                                                                
                                                             <?php }else{ ?>
-                                                            <a href="staff_orderInfo.php?orderNo=<?php echo $row['orderNo']; ?>">
+                                                            <a href="<?= url('staff/staff_orderInfo.php?orderNo=' . urlencode($row['orderNo'])) ?>">
                                                             <button type="button" class="btn btn-primary d-flex align-items-center">
                                                                 <i class="bi bi-arrow-right-circle me-2"></i>
                                                                 <span>Details</span>
                                                                 </button>
                                                             </a>
-                                                            <a href="staff_updateOrder.php?orderNo=<?php echo $row['orderNo']; ?>">
+                                                            <a href="<?= url('staff/staff_updateOrder.php?orderNo=' . urlencode($row['orderNo'])) ?>">
                                                             <button type="button" class="btn btn-success d-flex align-items-center">
                                                                 <i class="bi bi-arrow-repeat me-2"></i>
                                                                 <span>Update</span>

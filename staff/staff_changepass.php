@@ -28,20 +28,20 @@ if (isset($_POST['UpdatePass'])) {
         !preg_match('/[0-9]/', $new_password) || 
         !preg_match('/[\W_]/', $new_password)) {
         echo '<script>alert("Password must be at least 8 characters long, include uppercase, lowercase, a number, and a special character.");</script>';
-        echo "<script>window.location.href='staff_changepass.php?userId=$userId';</script>";
+        echo "<script>window.location.href='" . url('staff/staff_changepass.php?userId=' . urlencode($userId)) . "';</script>";
         exit();
         }
 
         // Validate passwords
         if (empty($new_password) || empty($confirm_new_password)) {
             echo "<script>alert('Password fields cannot be empty.');</script>";
-            echo "<script>window.location.href='staff_changepass.php?userId=$userId';</script>";
+            echo "<script>window.location.href='" . url('staff/staff_changepass.php?userId=' . urlencode($userId)) . "';</script>";
             exit();
         }
 
         if ($new_password !== $confirm_new_password) {
             echo "<script>alert('Passwords do not match.');</script>";
-            echo "<script>window.location.href='staff_changepass.php?userId=$userId';</script>";
+            echo "<script>window.location.href='" . url('staff/staff_changepass.php?userId=' . urlencode($userId)) . "';</script>";
             exit();
         }
 
@@ -57,14 +57,14 @@ if (isset($_POST['UpdatePass'])) {
 
         if ($stmt->execute()) {
             echo "<script>alert('Password updated successfully.');</script>";
-            echo "<script>window.location.href='updateStaffDetails.php?userId=$userId';</script>";
+            echo "<script>window.location.href='" . url('staff/updateStaffDetails.php?userId=' . urlencode($userId)) . "';</script>";
         } else {
             echo "<script>alert('Error updating password: " . $stmt->error . "');</script>";
         }
         $stmt->close();
     } else {
         echo "<script>alert('Invalid user ID.');</script>";
-        echo "<script>window.location.href='dashboard_staff.php';</script>";
+        echo "<script>window.location.href='" . url('staff/dashboard_staff.php') . "';</script>";
     }
 }
 ?>
@@ -110,7 +110,7 @@ if (isset($_POST['UpdatePass'])) {
                                              // Debugging: Check if role is retrieved successfully
                                             
                                                      ?>
-                                                     <form action="staff_changepass.php?userId=<?php echo $userId; ?>" method="POST" autocomplete="off">
+                                                     <form action="<?= url('staff/staff_changepass.php?userId=' . urlencode($userId)) ?>" method="POST" autocomplete="off">
                                                      <!-- <input type="hidden" name="userId" value="<?php echo $row['userId']; ?>"> -->
                                                      <div class="text-center mb-3">
                                                          <label for="userId" class="col col-form-label"><strong>User ID: <?php echo "$userId" ?></strong></label>
@@ -139,7 +139,7 @@ if (isset($_POST['UpdatePass'])) {
                                                      </div>
                                                                                                         
                                                      <div class="button d-flex justify-content-center pt-3 mt-3" style="gap: 15px;">
-                                                     <a href="updateStaffDetails.php?userId=<?php echo $userId ?>" >
+                                                     <a href="<?= url('updateStaffDetails.php?userId=' . urlencode($userId)) ?>" >
                                                          <button type="button" class="btn btn-secondary bg-gradient">
                                                              Back
                                                          </button>                                                       
@@ -154,7 +154,7 @@ if (isset($_POST['UpdatePass'])) {
                                              }                                          
                                      }else{
                                          echo 'Invalid user ID';
-                                         echo "<script>window.location.href='updateStaffDetails.php?userId= $userId';</script>";
+                                         echo "<script>window.location.href='" . url('updateStaffDetails.php?userId=' . urlencode($userId)) . "';</script>";
                                      }
                                 ?>      
                             </div>

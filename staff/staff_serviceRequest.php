@@ -28,7 +28,7 @@ if (isset($_GET['delete'])) {
     $stmt->bind_param('i', $reqserv);
     if ($stmt->execute()) {
         echo "<script>
-    window.location.href = 'staff_serviceRequest.php';
+    window.location.href = '<?= url('staff/staff_serviceRequest.php') ?>';
 </script>";
         exit();
     } else {
@@ -45,16 +45,16 @@ if (isset($_GET['delete'])) {
 <body>
 <ul class="nav nav-tabs justify-content-end mt-2" id="navTabs">
 <li class="nav-item ">
-        <a class="nav-link fs-5" href="staff_pendingserv.php">Pendings</a>
+        <a class="nav-link fs-5" href="<?= url('staff/staff_pendingserv.php') ?>">Pendings</a>
     </li>
     <li class="nav-item ">
-        <a class="nav-link fs-5" href="staff_acceptedService.php">Accepted</a>
+        <a class="nav-link fs-5" href="<?= url('staff/staff_acceptedService.php') ?>">Accepted</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link fs-5" href="staff_servdecline.php">Declined</a>
+        <a class="nav-link fs-5" href="<?= url('staff/staff_servdecline.php') ?>">Declined</a>
     </li>
     <li class="nav-item active">
-        <a class="nav-link fs-5" href="staff_serviceRequest.php">Service Requests</a>
+        <a class="nav-link fs-5" href="<?= url('staff/staff_serviceRequest.php') ?>">Service Requests</a>
     </li>
 </ul>
 <div class="py-5">
@@ -159,7 +159,7 @@ if (isset($_GET['delete'])) {
                                                             </button>
                                                             </a>
                                                         <?php } ?>
-                                                        <a href="staff_serviceRequest.php?delete=<?php echo $row['reqserv']; ?>" onclick="return confirm('Are you sure you want to delete this request?');">
+                                                        <a href="<?= url('staff/staff_serviceRequest.php?delete=' . urlencode($row['reqserv'])) ?>" onclick="return confirm('Are you sure you want to delete this request?');">
                                                             <button type="button" class="btn btn-danger d-flex align-items-center"><i class="bi bi-trash3 me-2"></i>
                                                             <span>Delete</span></button>
                                                         </a>
@@ -168,7 +168,7 @@ if (isset($_GET['delete'])) {
                                                             <button type="button" class="btn btn-primary d-flex align-items-center"><i class="bi bi-arrow-right-circle me-2"></i>
                                                             <span>Details</span></button>
                                                         </a>
-                                                        <a href="staff_serviceRequest.php?delete=<?php echo $row['reqserv']; ?>" onclick="return confirm('Are you sure you want to delete this request?');">
+                                                        <a href="<?= url('staff/staff_serviceRequest.php?delete=' . urlencode($row['reqserv'])) ?>" onclick="return confirm('Are you sure you want to delete this request?');">
                                                             <button type="button" class="btn btn-danger d-flex align-items-center"><i class="bi bi-trash3 me-2"></i>
                                                             <span>Delete</span></button>
                                                         </a>

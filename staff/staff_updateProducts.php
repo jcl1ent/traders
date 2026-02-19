@@ -54,7 +54,7 @@ if (isset($_POST['updateProduct'])) {
     
     if ($stmt->execute()) {
         echo "<script>alert('Product information updated successfully');</script>";
-        echo "<script>window.location.href='staff_products.php';</script>";
+        echo "<script>window.location.href='" . url('staff/staff_products.php') . "';</script>";
     } else {
         echo "<script>alert('Error updating product information');</script>";
     }
@@ -157,7 +157,7 @@ if (isset($_POST['updateProduct'])) {
                                 </div>
 
                                 <div class="d-flex justify-content-center m-3" style="gap: 10px;">
-                                    <a href="staff_products.php" class="btn btn-secondary">
+                                    <a href="<?= url('staff/staff_products.php') ?>" class="btn btn-secondary">
                                         <i class="bi bi-arrow-90deg-left"></i> Back 
                                     </a>
                                     <button type="submit" name="updateProduct" class="btn btn-primary">

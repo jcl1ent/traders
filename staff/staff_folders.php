@@ -23,7 +23,7 @@ if (isset($_POST['delete_folder'])) {
     if ($deleteFolderStmt->execute()) {
         echo "<script>
     alert('Folder deleted successfully!');
-    window.location.href = 'staff_folders.php';
+    window.location.href = '<?= url('staff/staff_folders.php') ?>';
 </script>";
     } else {
         echo "<div class='alert alert-danger'>Error deleting folder: " . htmlspecialchars($deleteFolderStmt->error) . "</div>";
@@ -61,7 +61,7 @@ $stmt->close();
                     <?= htmlspecialchars($folder['FolderName']) ?>
                     
                     <div>
-                        <a href="staff_viewfolder.php?view_folder=<?= urlencode($folder['FolderName']) ?>" class="btn btn-info btn-sm me-2">View Files</a>
+                        <a href="<?= url('staff_viewfolder.php?view_folder=' . urlencode($folder['FolderName'])) ?>" class="btn btn-info btn-sm me-2">View Files</a>
 
                         <!-- Delete button form -->
                         <form method="POST" style="display:inline;">
@@ -75,7 +75,7 @@ $stmt->close();
             <li class="list-group-item">No folders found.</li>
         <?php endif; ?>
     </ul>
-    <a href="staff_transDocs.php" class="btn btn-secondary mt-4">Back</a>
+    <a href="<?= url('staff_transDocs.php') ?>" class="btn btn-secondary mt-4">Back</a>
 </div>
 
 </body>

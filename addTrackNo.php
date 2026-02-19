@@ -54,7 +54,7 @@ if(isset($_POST['addTrackNo'])){
     $stmt->bind_param("si", $orderTrackNo, $orderNo);
     if ($stmt->execute()) {
         echo "<script>alert('Tracking Reference Added.');</script>";
-        echo "<script>window.location.href='admin_acceptedOrders.php ?>';</script>";
+        echo "<script>window.location.href='" . url('admin/admin_acceptedOrders.php') . "';</script>";
     } else {
         echo "<script>alert('Error: Error');</script>";
     }
@@ -92,7 +92,7 @@ if(isset($_POST['addTrackNo'])){
                                 while($row = $result->fetch_assoc()){
 
                             ?>
-                            <form action="addTrackNo.php?orderNo=<?php echo $row['orderNo']; ?>" method="POST">
+                            <form action="<?= url('addTrackNo.php?orderNo=' . urlencode($row['orderNo'])) ?>" method="POST">
                                 <div class="form-group mb-3">
                                     <label for="orderNo">Order Number: </label>
                                     <input type="text" name="orderNo" class="form-control"  value="<?php echo $row['orderNo'] ?>"readonly>
@@ -119,7 +119,7 @@ if(isset($_POST['addTrackNo'])){
                                                 <i class="bi bi-arrow-90deg-left"></i> Back
                                             </a>
                                         <?php }else if($row['role'] == 'staff'){ ?>
-                                            <a href="staff_acceptedOrders.php" class="btn btn-secondary">
+                                            <a href="<?= url('staff/staff_acceptedOrders.php') ?>" class="btn btn-secondary">
                                                 <i class="bi bi-arrow-90deg-left"></i> Back
                                             </a>
                                       <?php  }
@@ -134,7 +134,7 @@ if(isset($_POST['addTrackNo'])){
                         $stmt->close();
                     }else{
                         echo 'Invalid user ID';
-                        echo "<script>window.location.href='addTrackNo.php?orderNo=<?php $orderNo; ?>';</script>";
+                        echo "<script>window.location.href='" . url('addTrackNo.php?orderNo=' . urlencode($orderNo)) . "';</script>";
                     }
                             ?> 
                         </div>

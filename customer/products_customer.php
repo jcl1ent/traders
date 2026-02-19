@@ -34,7 +34,7 @@ if (isset($_SESSION['email'])) {
             // Check if the requested quantity exceeds available quantity
             if ($inputQuantity > $availableQuantity) {
                 echo '<script>alert("Requested quantity exceeds available stock. Available stock: ' . $availableQuantity . '")</script>';
-                echo '<script>window.location="products_customer.php"</script>';
+                echo "<script>window.location.href='" . url('customer/products_customer.php') . "';</script>";
                 exit; // Exit to prevent further processing
             }
 
@@ -54,10 +54,10 @@ if (isset($_SESSION['email'])) {
                     $_SESSION['cart'][$userId][$count] = $item_array;
                     $cartCount++; // Increment cart count
                     echo '<script>alert("Product is added to cart")</script>';
-                    echo '<script>window.location="products_customer.php"</script>';
+                    echo "<script>window.location.href='" . url('customer/products_customer.php') . "';</script>";
                 } else {
                     echo '<script>alert("Product is already added to cart")</script>';
-                    echo '<script>window.location="products_customer.php"</script>';
+                    echo "<script>window.location.href='" . url('customer/products_customer.php') . "';</script>";
                 }
             } else {
                 $item_array = array(
@@ -80,7 +80,7 @@ if (isset($_SESSION['email'])) {
                 unset($_SESSION["cart"][$userId][$key]);
                 $cartCount = count($_SESSION["cart"][$userId]); // Recalculate cart count
                 echo '<script>alert("Product has been removed")</script>';
-                echo '<script>window.location="cart_customer.php"</script>';
+                echo "<script>window.location.href='" . url('customer/cart_customer.php') . "';</script>";
             }
         }
     }
@@ -100,7 +100,7 @@ if (isset($_SESSION['email'])) {
                 <div class="col">
                     <div class="card">
                         <div class="card-body">
-                            <a href="cart_customer.php">
+                            <a href="<?= url('customer/cart_customer.php') ?>">
                                 <button type="button" class="btn btn-primary d-flex position-relative" name="cart" id="cart-button" data-cart-count="<?= $cartCount ?>">
                                     <i class="bi bi-cart-fill"> My Cart</i> 
                                     <span id="cart-count" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="display: <?= $cartCount > 0 ? 'inline' : 'none' ?>;">
@@ -119,7 +119,7 @@ if (isset($_SESSION['email'])) {
                                     $imageData = base64_encode($row['prodImg']); 
                                 ?>
                                 <div class="col-lg-4 col-md-6 col-sm-12 p-2">
-                                    <form method="POST" action="products_customer.php?prodNo=<?= $row['prodNo'] ?>">
+                                    <form method="POST" action="<?= url('customer/products_customer.php?prodNo=' . urlencode($row['prodNo'])) ?>">
                                         <img src="data:image/jpeg;base64,<?= $imageData ?>" class="d-block mx-auto img-fluid" style="height: 150px; object-fit: cover;">
                                         <div class="d-flex flex-column align-items-center mt-3">
                                             <h5 class="text-dark"><?php echo $row['prodName']; ?></h5>

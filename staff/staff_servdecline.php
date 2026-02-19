@@ -15,16 +15,16 @@ include("../includes/header.php");
 <body>
 <ul class="nav nav-tabs justify-content-end mt-2" id="navTabs">
 <li class="nav-item ">
-        <a class="nav-link fs-5" href="staff_pendingserv.php">Pendings</a>
+        <a class="nav-link fs-5" href="<?= url('staff_pendingserv.php') ?>">Pendings</a>
     </li>
     <li class="nav-item ">
-        <a class="nav-link fs-5" href="staff_acceptedService.php">Accepted</a>
+        <a class="nav-link fs-5" href="<?= url('staff/staff_acceptedService.php') ?>">Accepted</a>
     </li>
     <li class="nav-item active">
-        <a class="nav-link fs-5" href="staff_servdecline.php">Declined</a>
+        <a class="nav-link fs-5" href="<?= url('staff/staff_servdecline.php') ?>">Declined</a>
     </li>
     <li class="nav-item ">
-        <a class="nav-link fs-5" href="staff_serviceRequest.php">Service Requests</a>
+        <a class="nav-link fs-5" href="<?= url('staff/staff_serviceRequest.php') ?>">Service Requests</a>
     </li>
 </ul>
 <div class="py-5">

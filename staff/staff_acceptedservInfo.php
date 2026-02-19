@@ -157,7 +157,7 @@ include("../includes/header.php");
                                         <input class="form-control" type="text" value="<?php echo htmlspecialchars($row['schedule']); ?>" disabled readonly>
                                     </div>
                                 </div>
-                                <a href="staff_acceptedService.php">
+                                <a href="<?= url('staff/staff_acceptedService.php') ?>">
                                     <button type="button" class="btn btn-secondary">
                                         <i class="bi bi-arrow-90deg-left"></i> Back 
                                     </button>

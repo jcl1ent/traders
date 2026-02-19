@@ -28,10 +28,10 @@ if ($staffIdResult && mysqli_num_rows($staffIdResult) > 0) {
 <body>
 <ul class="nav nav-tabs justify-content-end mt-3" id="navTabs">
     <li class="nav-item active">
-        <a class="nav-link fs-5" href="staff_paymentsService.php">Request Services Payment</a>
+        <a class="nav-link fs-5" href="<?= url('staff_paymentsService.php') ?>">Request Services Payment</a>
     </li>
     <li class="nav-item ">
-        <a class="nav-link fs-5" href="staff_paymentsOrder.php">Orders Payment</a>
+        <a class="nav-link fs-5" href="<?= url('staff_paymentsOrder.php') ?>">Orders Payment</a>
     </li>
 </ul>
 <div class="py-5">
@@ -85,20 +85,20 @@ if ($staffIdResult && mysqli_num_rows($staffIdResult) > 0) {
                                                          <td data-label="Action">
                                                          <div class="actions d-flex justify-content-center" style="gap: 5px;">
                                                          <?php if (strtolower($row['paymentStatus']) == 'to be paid' || strpos($row['paymentStatus'], 'check') !== false) { ?>
-                                                                    <a href="staff_paymentsReqServInfo.php?pymntNo=<?php echo $row['pymntNo']; ?>">
+                                                                    <a href="<?= url('staff_paymentsReqServInfo.php?pymntNo=' . $row['pymntNo']) ?>">
                                                                         <button type="button" class="btn btn-success d-flex align-items-center">
                                                                             <i class="bi bi-credit-card me-2"></i>
                                                                             <span>Check Payment</span>
                                                                         </button>
                                                                     </a>
                                                                 <?php } else { ?>
-                                                                    <a href="staff_paymentsReqServInfo.php?pymntNo=<?php echo $row['pymntNo']; ?>">
+                                                                    <a href="<?= url('staff_paymentsReqServInfo.php?pymntNo=' . $row['pymntNo']) ?>">
                                                                         <button type="button" class="btn btn-success d-flex align-items-center">
                                                                             <i class="bi bi-credit-card me-2"></i>
                                                                             <span>Check Payment</span>
                                                                         </button>
                                                                     </a>
-                                                                    <a href="staff_paymentService_print.php?pymntNo=<?php echo $row['pymntNo']; ?>">
+                                                                    <a href="<?= url('staff_paymentService_print.php?pymntNo=' . $row['pymntNo']) ?>">
                                                                         <button type="button" class="btn btn-primary d-flex align-items-center">
                                                                             <i class="bi bi-file-earmark-text me-2"></i>
                                                                             <span>View Receipt</span>

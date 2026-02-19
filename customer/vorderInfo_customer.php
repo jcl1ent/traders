@@ -11,7 +11,7 @@ include("../dbcon.php");
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="../css/style.css">
+    <link rel="stylesheet" type="text/css" href="<?= url('css/style.css') ?>">
 </head>
 <body>
     <div class="py-5">
@@ -80,7 +80,7 @@ include("../dbcon.php");
                                         
                                     </table>
                                     <div class="back mb-3">
-                                            <a href="vorder_customer.php">
+                                            <a href="<?= url('customer/vorder_customer.php') ?>">
                                                 <button type="button" class="btn btn-secondary">
                                                 <i class="bi bi-arrow-90deg-left"></i> Back
                                                 </button>

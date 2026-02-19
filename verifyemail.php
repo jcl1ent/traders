@@ -18,30 +18,26 @@ if(isset($_GET['token'])){
 
             if($update_query_run){
                 $_SESSION['status'] = "Your Account has been verified successfully!";
-                header("Location: index.php");
-                exit(0);
+                redirect('index.php');
 
             }
             else{
                 $_SESSION['status'] = "Verification Failed!";
-                header("Location: index.php");
-                exit(0);
+                redirect('index.php');
 
             }
         }else{
             $_SESSION['status'] = "Email Already Verified. Please Login!";
-            header("Location: index.php");
-            exit(0);
+            redirect('index.php');
         }
 
     }else{
         $_SESSION['status'] = "This token does not exists";
-        header("Location: index.php");
-        
+        redirect('index.php');
     }
 }
 else{
     $_SESSION['status'] = "Not Allowed";
-    header("Location: index.php");
+    redirect('index.php');
 }    
 ?>

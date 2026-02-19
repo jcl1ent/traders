@@ -64,7 +64,7 @@ if ($sentResult->num_rows > 0) {
             <?php endif; ?>
         </tbody>
     </table>
-    <a href="staff_transDocs.php" class="btn btn-secondary mt-4">Back</a>
+    <a href="<?= url('staff/staff_transDocs.php') ?>" class="btn btn-secondary mt-4">Back</a>
 </div>
 </body>
 </html>

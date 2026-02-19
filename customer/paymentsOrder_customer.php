@@ -114,10 +114,10 @@ if (isset($_GET['fetch_receipts']) && isset($_GET['pymntNo'])) {
 <body>
 <ul class="nav nav-tabs justify-content-end mt-3" id="navTabs">
     <li class="nav-item">
-        <a class="nav-link fs-5" href="payments_customer.php">Request Services Payment</a>
+        <a class="nav-link fs-5" href="<?= url('customer/payments_customer.php') ?>">Request Services Payment</a>
     </li>
     <li class="nav-item active">
-        <a class="nav-link fs-5" href="paymentsOrder_customer.php">Orders Payment</a>
+        <a class="nav-link fs-5" href="<?= url('customer/paymentsOrder_customer.php') ?>">Orders Payment</a>
     </li>
 </ul>
 <div class="py-5">

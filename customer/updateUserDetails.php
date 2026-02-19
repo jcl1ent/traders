@@ -66,6 +66,7 @@ if (isset($_POST['UpdateUser'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="<?= url('css/style.css') ?>">
 </head>
 <body>
 <div class="py-5">
@@ -75,8 +76,8 @@ if (isset($_POST['UpdateUser'])) {
                     <div class="card shadow">
                         <div class="card-header">   
                         <div class="div d-flex justify-content-end" >
-                                                    <a href="customer_changepass.php?userId=<?php echo $_SESSION['userId']; ?>" >
-                                                        <button type="button" class="btn btn-white">
+                                                    <a href="<?= url('customer/customer_changepass.php?userId=' . urlencode($_SESSION['userId'])) ?>" >
+                                                        <button type="button" class="btn btn-white custom-bg">
                                                             Change Password
                                                         </button>                                                       
                                                     </a>
@@ -163,7 +164,7 @@ if (isset($_POST['UpdateUser'])) {
                                                     </div>
                                                                                                        
                                                     <div class="button" style="gap: 15px;">
-                                                    <a href="dashboard.php" >
+                                                    <a href="<?= url('customer/dashboard.php') ?>" >
                                                         <button type="button" class="btn btn-secondary bg-gradient">
                                                             Back
                                                         </button>                                                       
@@ -179,7 +180,7 @@ if (isset($_POST['UpdateUser'])) {
                                             } 
                                         }else{
                                             echo 'Invalid user ID';
-                                            echo "<script>window.location.href='updateUserDetails.php?userId= $userId';</script>";
+                                            echo "<script>window.location.href='" . url('customer/updateUserDetails.php?userId=' . urlencode($userId)) . "';</script>";
                                         }
                                 ?>      
                             </div>

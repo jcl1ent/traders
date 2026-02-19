@@ -48,7 +48,7 @@ if (isset($_POST['acceptPayment'])) {
     $stmt->close();
 
     echo "<script>alert('Payment Accepted.')</script>";
-    echo '<script>window.location="staff_paymentsOrder.php"</script>';
+    echo '<script>window.location="' . url('staff_paymentsOrder.php') . '"</script>';
 }
 
 ?>
@@ -57,7 +57,7 @@ if (isset($_POST['acceptPayment'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="../css/style.css">
+    <link rel="stylesheet" type="text/css" href="<?= url('css/style.css') ?>">
 </head>
 <body>
     <div class="py-5">
@@ -94,7 +94,7 @@ if (isset($_POST['acceptPayment'])) {
                                 }
                                 ?>
                                 <div class="back mb-3 d-flex justify-content-center" style="gap: 15px;">
-                                    <a href="staff_paymentsOrder.php">
+                                    <a href="<?= url('staff_paymentsOrder.php') ?>">
                                         <button type="button" class="btn btn-secondary">
                                             <i class="bi bi-arrow-90deg-left"></i> Back
                                         </button>

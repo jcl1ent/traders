@@ -105,11 +105,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Execute the statement and check for success
     if ($stmt->execute()) {
         echo "<script>alert('Feedback submitted successfully!');</script>";
-        echo "<script>window.location.href = 'vserviceAcc_customer.php?feedback=success';</script>";
+        echo "<script>window.location.href = '" . url('customer/vserviceAcc_customer.php?feedback=success') . "';</script>";
         exit();
     } else {
         echo "<script>alert('Error submitting feedback. Please try again later.');</script>";
-        echo "<script>window.location.href = 'vserviceAcc_customer.php';</script>";
+        echo "<script>window.location.href = '" . url('customer/vserviceAcc_customer.php') . "';</script>";
         exit();
     }
 }
@@ -135,7 +135,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </div>
             
             <button type="submit" class="btn btn-primary">Submit Feedback</button>
-            <a href="vserviceAcc_customer.php" class="btn btn-secondary">Cancel</a>
+            <a href="<?= url('customer/vserviceAcc_customer.php') ?>" class="btn btn-secondary">Cancel</a>
         </form>
     </div>
 </body>

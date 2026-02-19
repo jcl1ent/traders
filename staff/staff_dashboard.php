@@ -302,7 +302,7 @@ new Chart(document.getElementById("yearlySalesChart"), {
 
                                 ?>
                                 </div>
-                                <a class="medium text-white" href="staff_serviceRequest.php"><i class="fas fa-angle-right">Full Details</i></a>
+                                <a class="medium text-white" href="<?= url('staff/staff_serviceRequest.php') ?>"><i class="fas fa-angle-right">Full Details</i></a>
                             </div>
                     </div>
                 </div>
@@ -322,7 +322,7 @@ new Chart(document.getElementById("yearlySalesChart"), {
                                 }
                                 ?>
                                 </div>
-                                <a class="medium text-white" href="staff_acceptedService.php"><i class="fas fa-angle-right">Full Details</i></a>
+                                <a class="medium text-white" href="<?= url('staff/staff_acceptedService.php') ?>"><i class="fas fa-angle-right">Full Details</i></a>
                             </div>
                     </div>
                 </div>
@@ -342,7 +342,7 @@ new Chart(document.getElementById("yearlySalesChart"), {
                                 }
                                 ?>
                                 </div>
-                                <a class="medium text-white" href="staff_servdecline.php"><i class="fas fa-angle-right">Full Details</i></a>
+                                <a class="medium text-white" href="<?= url('staff/staff_servdecline.php') ?>"><i class="fas fa-angle-right">Full Details</i></a>
                             </div>
                     </div>
                 </div>
@@ -363,7 +363,7 @@ new Chart(document.getElementById("yearlySalesChart"), {
 
                                 ?>
                                 </div>
-                                <a class="medium text-white" href="staff_tickets.php"><i class="fas fa-angle-right">Full Details</i></a>
+                                <a class="medium text-white" href="<?= url('staff/staff_tickets.php') ?>"><i class="fas fa-angle-right">Full Details</i></a>
                             </div>
                     </div>
                 </div>
@@ -385,7 +385,7 @@ new Chart(document.getElementById("yearlySalesChart"), {
                                     }
                                 ?>
                                 </div>
-                                <a class="medium text-white" href="staff_custAccounts.php"><i class="fas fa-angle-right">Full Details</i></a>
+                                <a class="medium text-white" href="<?= url('staff/staff_custAccounts.php') ?>"><i class="fas fa-angle-right">Full Details</i></a>
                             </div>
                     </div>
                 </div>
@@ -406,7 +406,7 @@ new Chart(document.getElementById("yearlySalesChart"), {
                                 
                                 ?>
                                 </div>
-                                <a class="medium text-white" href="staff_orders.php"><i class="fas fa-angle-right">Full Details</i></a>
+                                <a class="medium text-white" href="<?= url('staff/staff_orders.php') ?>"><i class="fas fa-angle-right">Full Details</i></a>
                             </div>
                     </div>
                 </div>
@@ -465,7 +465,7 @@ new Chart(document.getElementById("yearlySalesChart"), {
                         echo "</div>";
                     ?>
                     </div>
-                    <a class="d-block text-center mt-2 text-white bg-dark p-1 rounded" href="customerServiceList.php" style="text-decoration: none; font-size: 1.1rem;">
+                    <a class="d-block text-center mt-2 text-white bg-dark p-1 rounded" href="<?= url('customer/customerServiceList.php') ?>" style="text-decoration: none; font-size: 1.1rem;">
                         <i class="fas fa-angle-right"></i> Full Details
                     </a>
                 </div>
@@ -521,7 +521,7 @@ new Chart(document.getElementById("yearlySalesChart"), {
                     <p class="mb-1 fw-bold">Rate: <span class="fw-normal"><?php echo $servRate; ?></span></p>
                     <p class="mb-1 fw-normal">Total: <span class="fw-bold"><?php echo $servCount; ?></span></p>
                 </div>
-                <a class="d-block text-center mt-2 text-white bg-dark p-1 rounded" href="admin_services.php" style="text-decoration: none; font-size: 1.1rem;">
+                <a class="d-block text-center mt-2 text-white bg-dark p-1 rounded" href="<?= url('admin/admin_services.php') ?>" style="text-decoration: none; font-size: 1.1rem;">
                     <i class="fas fa-angle-right"></i> Full Details
                 </a>
             </div>
@@ -576,7 +576,7 @@ new Chart(document.getElementById("yearlySalesChart"), {
                     echo "</div>";
                 ?>
                 </div>
-                <a class="d-block text-center mt-2 text-white bg-dark p-1 rounded" href="staff_products.php" style="text-decoration: none; font-size: 1.1rem;">
+                <a class="d-block text-center mt-2 text-white bg-dark p-1 rounded" href="<?= url('staff/staff_products.php') ?>" style="text-decoration: none; font-size: 1.1rem;">
                     <i class="fas fa-angle-right"></i> Full Details
                 </a>
             </div>
@@ -625,7 +625,7 @@ new Chart(document.getElementById("yearlySalesChart"), {
                         echo "</div>";
                     ?>
                 </div>
-                <a class="d-block text-center mt-2 text-white bg-dark p-1 rounded" href="staff_products.php" style="text-decoration: none; font-size: 1.1rem;">
+                <a class="d-block text-center mt-2 text-white bg-dark p-1 rounded" href="<?= url('staff/staff_products.php') ?>" style="text-decoration: none; font-size: 1.1rem;">
                     <i class="fas fa-angle-right"></i> Full Details
                 </a>
             </div>

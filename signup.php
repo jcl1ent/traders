@@ -1,5 +1,6 @@
 <?php 
 session_start();
+include __DIR__ . "/config.php";
 $page_title = "Sign Up";
 include("dbcon.php");
 
@@ -27,11 +28,13 @@ function sendemail_verify($firstname, $email, $verify_token) {
     $mail->isHTML(true);                                  // Set email format to HTML
     $mail->Subject = 'Email Verification';
 
+    // build verification link and email body separately
+    $verifyLink = url("verifyemail.php?token=$verify_token");
     $email_template = "
         <h2>You have registered with Ronyx Trading</h2>
         <h4>Verify your email address to login using the link below:</h4>
         <br><br>
-        <a href='http://localhost:3000/traders/verifyemail.php?token=$verify_token'>Verify Email</a>";
+        <a href='$verifyLink'>Verify Email</a>";
     $mail->Body = $email_template;
 
     try {
@@ -83,7 +86,7 @@ if (isset($_POST['signup_btn'])) {
 
     if ($result->num_rows > 0) {
         $_SESSION['status'] = "Email already exists.";
-        header("Location: signup.php");
+        redirect('signup.php');
         exit();
     } else {
 
@@ -131,11 +134,11 @@ if (isset($_POST['signup_btn'])) {
         if ($query_run) {
             sendemail_verify($firstname, $email, $verify_token);
             $_SESSION['status'] = "Registration Complete! Please verify your email address.";
-            header("Location: signup.php");
+            redirect('signup.php');
             exit();
         } else {
             $_SESSION['status'] = "Registration Failed";
-            header("Location: signup.php");
+            redirect('signup.php');
             exit();
         }
     }
@@ -241,6 +244,9 @@ function validateForm() {
         alert("Password must be at least 8 characters long, include uppercase, lowercase, a number, and a special character.");
         return false; // Prevents form submission
     }
+
+        var password = document.forms["signupForm"]["password"].value;
+    var confirm_password = document.forms["signupForm"]["confirm_password"].value;
 
     if(password_pattern.test(password) && password !== confirm_password) {
         alert("Passwords do not match.");

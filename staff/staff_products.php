@@ -82,7 +82,7 @@ include("../includes/header.php");
                                     <div class="col-lg-4 col-md-6 col-sm-12 p-2">
                                         <div class="border border-dark rounded p-3">
                                             <div class="delete_button d-flex justify-content-end mb-3" style="gap: 10px;"> 
-                                            <a href="staff_updateProducts.php?prodNo=<?php echo $row['prodNo']; ?>">
+                                            <a href="<?= url('staff_updateProducts.php?prodNo=' . $row['prodNo']) ?>">
                                                 <button type="button" class="btn btn-success">
                                                 <i class="bi bi-arrow-clockwise"></i> Update
                                                 </button>

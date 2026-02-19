@@ -2,6 +2,9 @@
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
+
+// load configuration/helpers (base URL, redirect etc.)
+include_once __DIR__ . "/config.php";
 include_once("dbcon.php");
 
 date_default_timezone_set('Asia/Manila');
@@ -31,11 +34,12 @@ if (!function_exists('sendemail_verify')) {
         $mail->isHTML(true);                                  // Set email format to HTML
         $mail->Subject = 'Email Verification';
 
+        $verifyLink = url("verifyemail.php?token=$verify_token");
         $email_template = "
             <h2>You have registered with Ronyx Trading</h2>
             <h4>Verify your email address to login using the link below:</h4>
             <br><br>
-            <a href='http://localhost:3000/traders/verifyemail.php?token=$verify_token'>Verify Email</a>";
+            <a href='$verifyLink'>Verify Email</a>";
         $mail->Body = $email_template;
 
         try {
@@ -101,13 +105,13 @@ if (isset($_POST['login_btn'])) {
                     // Redirecting to dashboards
                     switch ($row['role']) {
                         case 'admin':
-                            header("Location: admin/admin_dashboard.php");
+                            redirect('admin/admin_dashboard.php');
                             break;
                         case 'staff':
-                            header("Location: staff/staff_dashboard.php");
+                            redirect('staff/staff_dashboard.php');
                             break;
                         default:
-                            header("Location: customer/dashboard.php");
+                            redirect('customer/dashboard.php');
                             break;
                     }
                     exit();
@@ -125,7 +129,6 @@ if (isset($_POST['login_btn'])) {
         $_SESSION['status'] = "All fields are required.";
     }
     // Redirect back to the login page with status
-    header("Location: index.php");
-    exit();
+    redirect('index.php');
 }
 ?>

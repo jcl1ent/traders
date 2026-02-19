@@ -1,5 +1,6 @@
 <?php
 session_start();
+include __DIR__ . "/config.php";
 include("dbcon.php");
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
@@ -24,11 +25,13 @@ function send_password_reset($get_fullName, $get_email,$token){
     $mail->isHTML(true);                                  // Set email format to HTML
     $mail->Subject = 'Reset Password Link';
 
+    // build reset link and email body
+    $resetLink = url("password_change.php?token=$token&email=$get_email");
     $email_template = "
         <h2>Hello</h2>
         <h4>You are receiving this email because we receive a Password Reset Request for your email.</h4>
         <br><br>
-        <a href='http://localhost:3000/traders/password_change.php?token=$token&email=$get_email'>Reset Password</a>";
+        <a href='$resetLink'>Reset Password</a>";
 
     $mail->Body = $email_template;
 
@@ -58,19 +61,16 @@ if(isset($_POST['password_reset'])){
         if($update_token_run){
             send_password_reset($get_fullName, $get_email,$token);
             $_SESSION['status']= "Check your email for the Reset Password Link.";
-            header("Location: password_reset.php");
-            exit(0);
+            redirect('password_reset.php');
 
         }else{
             $_SESSION['status']="Something went wrong.";
-            header("Location: password_reset.php");
-            exit(0);
+            redirect('password_reset.php');
         }
 
     }else{
         $_SESSION['status']="No email found!";
-        header("Location: password_reset.php");
-        exit(0);
+        redirect('password_reset.php');
     }
 
 }
@@ -101,32 +101,26 @@ if (isset($_POST['password_update'])) {
                         $update_to_new_token_run = mysqli_query($con, $update_to_new_token);
 
                         $_SESSION['status'] = "Password Updated!";
-                        header("Location: index.php");
-                        exit(0);
+                        redirect('index.php');
                     } else {
                         $_SESSION['status'] = "Something went wrong.";
-                        header("Location: password_change.php?token=$token&email=$email");
-                        exit(0);
+                        redirect("password_change.php?token=$token&email=$email");
                     }
                 } else {
                     $_SESSION['status'] = "Passwords do not match.";
-                    header("Location: password_change.php?token=$token&email=$email");
-                    exit(0);
+                    redirect("password_change.php?token=$token&email=$email");
                 }
             } else {
                 $_SESSION['status'] = "Invalid Token!";
-                header("Location: password_change.php?token=$token&email=$email");
-                exit(0);
+                redirect("password_change.php?token=$token&email=$email");
             }
         } else {
             $_SESSION['status'] = "All fields are required!";
-            header("Location: password_change.php?token=$token&email=$email");
-            exit(0);
+            redirect("password_change.php?token=$token&email=$email");
         }
     } else {
         $_SESSION['status'] = "No token available!";
-        header("Location: password_change.php");
-        exit(0);
+        redirect("password_change.php");
     }
 }
 

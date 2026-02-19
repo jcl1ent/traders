@@ -67,7 +67,7 @@ if ($pymntNo > 0) {
                                 }
                                 ?>
                                 <div class="back mb-3 d-flex justify-content-center" style="gap: 15px;">
-                                    <a href="payments_customer.php">
+                                    <a href="<?= url('customer/payments_customer.php') ?>">
                                         <button type="button" class="btn btn-secondary">
                                             <i class="bi bi-arrow-90deg-left"></i> Back
                                         </button>

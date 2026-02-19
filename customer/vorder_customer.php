@@ -1,8 +1,5 @@
 <?php
 include("../logincode.php");
-$page_title = "View Order";
-include("sidebar.php");
-include("../includes/header.php"); 
 include("../dbcon.php");
 
 if (isset($_SESSION['email'])) {
@@ -46,7 +43,7 @@ if (isset($_SESSION['email'])) {
     $fullName = trim("$firstname $middlename $lastname");
 
     // Fetch the first available adminId from admin table
-    $sql = "SELECT adminId FROM admin LIMIT 1";  
+    $sql = "SELECT adminId FROM admin LIMIT 1";
     $stmt = $con->prepare($sql);
     $stmt->execute();
     $stmt->bind_result($adminId);
@@ -142,40 +139,64 @@ if (isset($_POST['deleteOrder'])) {
         $stmt_delete_order->execute();
         $stmt_delete_order->close();
 
+        // Delete the associated payment record
+        $sql_delete_payment = "DELETE FROM payment WHERE orderNo = ?";
+        $stmt_delete_payment = $con->prepare($sql_delete_payment);
+        $stmt_delete_payment->bind_param("i", $orderNo);
+        $stmt_delete_payment->execute();
+        $stmt_delete_payment->close();
+
         // Commit the transaction
         $con->commit();
 
-        echo "<script>alert('Order deleted successfully.')</script>";
-        echo '<script>window.location="vorder_customer.php"</script>';
-
+        $_SESSION['status'] = "Order deleted successfully.";
+        redirect('customer/vorder_customer.php');
     } catch (Exception $e) {
         // Rollback the transaction if something goes wrong
         $con->rollback();
-        echo "<script>alert('Failed to delete the order: " . $e->getMessage() . "')</script>";
-        echo '<script>window.location="vorder_customer.php"</script>';
+        $_SESSION['status'] = "Failed to delete the order: " . $e->getMessage();
+        redirect('customer/vorder_customer.php');
     }
 }
 
+$page_title = "View Order";
+include("sidebar.php");
+include("../includes/header.php");
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="../css/style.css">
+    <link rel="stylesheet" type="text/css" href="<?= url('css/style.css') ?>">
 </head>
+
 <body>
+    <div class="py-3">
+        <div class="container">
+            <?php
+            if (isset($_SESSION['status'])) {
+                echo '<div class="alert alert-info alert-dismissible fade show" role="alert">
+                ' . $_SESSION['status'] . '
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>';
+                unset($_SESSION['status']);
+            }
+            ?>
+        </div>
+    </div>
     <div class="py-5">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col">
                     <div class="card shadow">
-                        <div class="card-header">                    
+                        <div class="card-header">
                             <div class="card-body">
                                 <div class="table-responsive">
                                     <table id="dataTable" class="table table-hover table-bordered">
                                         <thead>
-                                            <tr class="text-center">                                      
+                                            <tr class="text-center">
                                                 <th scope="col">Order Number</th>
                                                 <th scope="col">Product Name</th>
                                                 <th scope="col">Quantity</th>
@@ -194,7 +215,7 @@ if (isset($_POST['deleteOrder'])) {
                                             <?php
                                             if (isset($_SESSION['email']) && isset($_SESSION['custId'])) {
                                                 $custId = $_SESSION['custId'];
-                                            
+
                                                 $query = "
                                                     SELECT 
                                                         orders.orderNo, 
@@ -214,16 +235,16 @@ if (isset($_POST['deleteOrder'])) {
                                                     GROUP BY orders.orderNo
                                                     ORDER BY orders.orderNo DESC
                                                 ";
-                                                
+
                                                 $stmt = $con->prepare($query);
                                                 $stmt->bind_param("i", $custId);
                                                 $stmt->execute();
                                                 $result = $stmt->get_result();
-                                                
+
                                                 if ($result->num_rows > 0) {
-                                                    while ($row = $result->fetch_assoc()) {                                                                
-                                                        ?>
-                                                        <tr class="text-center">                                                                    
+                                                    while ($row = $result->fetch_assoc()) {
+                                            ?>
+                                                        <tr class="text-center">
                                                             <td><?php echo $row['orderNo']; ?></td>
                                                             <td><?php echo $row['productNames']; ?></td>
                                                             <td><?php echo $row['totalQuantity']; ?></td>
@@ -236,30 +257,30 @@ if (isset($_POST['deleteOrder'])) {
                                                             <td><?php echo $row['status']; ?></td>
                                                             <?php if ($row['orderTrackNo'] == NULL) { ?>
                                                                 <td> </td>
-                                                                <?php }else {?>
+                                                            <?php } else { ?>
                                                                 <td>
                                                                     <a href="<?php echo htmlspecialchars($row['orderTrackNo']); ?>">
                                                                         <?php echo htmlspecialchars($row['orderTrackNo']); ?>
                                                                     </a>
                                                                 </td>
-                                                                
-                                                            <?php }?>
+
+                                                            <?php } ?>
                                                             <td>
                                                                 <div class="actions d-flex justify-content-center" style="gap: 5px;">
                                                                     <?php if ($row['status'] === 'Pending Order') { ?>
-                                                                        <button type="button" class="btn btn-danger d-flex align-items-center" 
-                                                                                data-bs-toggle="modal" 
-                                                                                data-bs-target="#deleteModal" 
-                                                                                data-order-no="<?php echo $row['orderNo']; ?>">
-                                                                                <i class="bi bi-trash3 me-2"></i>
-                                                                                <span>Delete</span>
+                                                                        <button type="button" class="btn btn-danger d-flex align-items-center"
+                                                                            data-bs-toggle="modal"
+                                                                            data-bs-target="#deleteModal"
+                                                                            data-order-no="<?php echo $row['orderNo']; ?>">
+                                                                            <i class="bi bi-trash3 me-2"></i>
+                                                                            <span>Delete</span>
                                                                         </button>
                                                                     <?php } ?>
-                                                                    <a href="vorderInfo_customer.php?orderNo=<?php echo $row['orderNo']?>">
+                                                                    <a href="<?= url('customer/vorderInfo_customer.php?orderNo=' . urlencode($row['orderNo'])) ?>">
                                                                         <button type="button" class="btn btn-primary me-2 d-flex align-items-center"><i class="bi bi-arrow-right-circle me-2"></i>
-                                                                        <span>Details</span></button>
+                                                                            <span>Details</span></button>
                                                                     </a>
-                                                                    <?php 
+                                                                    <?php
                                                                     echo "<!-- Debugging: status: " . $row['status'] . " -->";
                                                                     if ($row['status'] === 'Order Delivered') { ?>
                                                                         <div class="text-center">
@@ -274,16 +295,16 @@ if (isset($_POST['deleteOrder'])) {
                                                                             </form>
                                                                         </div>
                                                                     <?php } ?>
-                                                            </td>                                                                   
+                                                            </td>
                                                         </tr>
-                                                        <?php 
+                                            <?php
                                                     }
-                                                } 
+                                                }
                                             }
                                             ?>
                                         </tbody>
                                     </table>
-                                </div>    
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -292,33 +313,34 @@ if (isset($_POST['deleteOrder'])) {
         </div>
     </div>
     <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="deleteModalLabel">Confirm Deletion</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
-            Are you sure you want to delete this order?
-          </div>
-          <div class="modal-footer">
-            <form method="POST" action="vorder_customer.php" id="deleteForm">
-              <input type="hidden" name="orderNo" id="orderNo">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
-              <button type="submit" name="deleteOrder" class="btn btn-danger">Yes</button>
-            </form>
-            <script type="text/javascript">
-        var deleteModal = document.getElementById('deleteModal');
-        deleteModal.addEventListener('show.bs.modal', function (event) {
-            var button = event.relatedTarget;
-            var orderNo = button.getAttribute('data-order-no');
-            var inputOrderNo = deleteModal.querySelector('#orderNo');
-            inputOrderNo.value = orderNo;
-        });
-    </script>
-          </div>
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteModalLabel">Confirm Deletion</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Are you sure you want to delete this order?
+                </div>
+                <div class="modal-footer">
+                    <form method="POST" action="" id="deleteForm">
+                        <input type="hidden" name="orderNo" id="orderNo">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                        <button type="submit" name="deleteOrder" class="btn btn-danger">Yes</button>
+                    </form>
+                    <script type="text/javascript">
+                        var deleteModal = document.getElementById('deleteModal');
+                        deleteModal.addEventListener('show.bs.modal', function(event) {
+                            var button = event.relatedTarget;
+                            var orderNo = button.getAttribute('data-order-no');
+                            var inputOrderNo = deleteModal.querySelector('#orderNo');
+                            inputOrderNo.value = orderNo;
+                        });
+                    </script>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
 </body>
+
 </html>
