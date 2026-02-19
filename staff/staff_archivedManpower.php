@@ -19,7 +19,7 @@ include("../includes/header.php");
                     
                     <div class="card">
                         <div class="add_manpower d-flex justify-content-end mt-2 me-2" style="gap: 10px;">
-                            <a href="staff_manpower.php">
+                            <a href="<?= url('staff/staff_manpower.php') ?>">
                                 <button type="button" class="btn  btn-secondary bg-gradient">
                                 <i class="bi bi-arrow-left"></i> Back
                                 </button>
@@ -42,7 +42,7 @@ include("../includes/header.php");
                                     <div class="col-lg-4 col-md-6 col-sm-12 p-2">
                                         <div class="border border-dark rounded p-3">
                                             <div class="delete_button d-flex justify-content-end mb-3" style="gap: 10px;">
-                                            <a href="staff_updateManpower.php?mpId=<?php echo $row['mpId']; ?>">
+                                            <a href="<?= url('staff/staff_updateManpower.php?mpId=' . urlencode($row['mpId'])) ?>">
                                                 <button type="button" class="btn btn-success">
                                                 <i class="bi bi-arrow-clockwise"></i>Update
                                                 </button>

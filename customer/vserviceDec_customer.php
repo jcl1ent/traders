@@ -12,18 +12,18 @@ include("../dbcon.php");
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="../css/style.css">
+    <link rel="stylesheet" type="text/css" href="<?= url('css/style.css') ?>">
 </head>
 <body>
 <ul class="nav nav-tabs justify-content-end mt-3" id="navTabs">
     <li class="nav-item">
-        <a class="nav-link fs-5" href="vservice_customer.php">Requested Services</a>
+        <a class="nav-link fs-5" href="<?= url('customer/vservice_customer.php') ?>">Requested Services</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link fs-5" href="vserviceAcc_customer.php">Accepted Services</a>
+        <a class="nav-link fs-5" href="<?= url('customer/vserviceAcc_customer.php') ?>">Accepted Services</a>
     </li>
     <li class="nav-item active">
-        <a class="nav-link fs-5" href="vserviceDec_customer.php">Declined Services</a>
+        <a class="nav-link fs-5" href="<?= url('customer/vserviceDec_customer.php') ?>">Declined Services</a>
     </li>
 </ul>
 <div class="py-5">

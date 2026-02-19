@@ -145,7 +145,7 @@ include("../includes/header.php");
                                         <input class="form-control" type="text" value="<?php echo htmlspecialchars($row['createDate']); ?>" disabled readonly>                                                    
                                     </div>
                                 </div>
-                                <a href="staff_serviceRequest.php">
+                                <a href="<?= url('staff/staff_serviceRequest.php') ?>">
                                     <button type="button" class="btn btn-secondary">
                                         <i class="bi bi-arrow-90deg-left"></i> Back 
                                     </button>

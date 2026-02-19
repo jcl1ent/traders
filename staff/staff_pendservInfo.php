@@ -151,7 +151,7 @@ include("../includes/header.php");
                                     </div>
                                 </div>
                                 
-                                <a href="staff_pendingserv.php">
+                                <a href="<?= url('staff_pendingserv.php') ?>">
                                     <button type="button" class="btn btn-secondary">
                                         <i class="bi bi-arrow-90deg-left"></i> Back 
                                     </button>

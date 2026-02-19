@@ -38,7 +38,7 @@ if (isset($_POST['create_folder'])) {
             }
             echo "<script>
     alert('Folder \"$folderName\" created successfully!');
-    window.location.href = 'staff_folders.php';
+    window.location.href = '<?= url('staff/staff_folders.php') ?>';
 </script>";
         } else {
             error_log("Error creating folder: " . htmlspecialchars($insertFolderStmt->error), 3, 'error_log.txt');
@@ -116,7 +116,7 @@ if (isset($_POST['upload'])) {
                 move_uploaded_file($tmpName, $documentPath);
                 echo "<script>
                 alert('Document \"$docName\" uploaded successfully!');
-                window.location.href = 'staff_searchDoc.php';
+                window.location.href = '<?= url('staff/staff_searchDoc.php') ?>';
             </script>";
             } else {
                 echo "<div class='alert alert-danger'>Error uploading document '$docName': " . htmlspecialchars($stmt->error) . "</div>";
@@ -150,10 +150,10 @@ $stmt->close();
 <div class="container mt-5">
     <!-- Document Requests Button -->
     <div class="d-flex justify-content-end mb-4">
-    <a href="staff_docReq.php" class="btn btn-primary me-2">Document Requests</a>
-    <a href="staff_sharedDoc.php" class="btn btn-danger me-2">Shared Documents</a>
-    <a href="staff_searchDoc.php" class="btn btn-info me-2">Uploaded Documents</a>
-    <a href="staff_folders.php" class="btn btn-warning">Folders</a>
+    <a href="<?= url('staff/staff_docReq.php') ?>" class="btn btn-primary me-2">Document Requests</a>
+    <a href="<?= url('staff/staff_sharedDoc.php') ?>" class="btn btn-danger me-2">Shared Documents</a>
+    <a href="<?= url('staff/staff_searchDoc.php') ?>" class="btn btn-info me-2">Uploaded Documents</a>
+    <a href="<?= url('staff/staff_folders.php') ?>" class="btn btn-warning">Folders</a>
 </div>
 
 <h2 class="mb-4">Create New Folder</h2>

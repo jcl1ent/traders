@@ -85,7 +85,7 @@ $stmt->close();
                             <input type="hidden" name="DocNo" value="<?= htmlspecialchars($document['DocNo']) ?>">
                             <button type="submit" name="delete_doc" class="btn btn-danger btn-sm me-2">Delete</button>
                         </form>
-                        <a href="send_doc_to_user2.php?DocNo=<?= htmlspecialchars($document['DocNo']) ?>" class="btn btn-info btn-sm">Share</a>
+                        <a href="<?= url('send_doc_to_user2.php?DocNo=' . urlencode($document['DocNo'])) ?>" class="btn btn-info btn-sm">Share</a>
                     </div>
                 </li>
             <?php endforeach; ?>
@@ -93,7 +93,7 @@ $stmt->close();
             <li class="list-group-item">No documents found in this folder.</li>
         <?php endif; ?>
     </ul>
-    <a href="staff_folders.php" class="btn btn-secondary mt-4">Back</a>
+    <a href="<?= url('staff/staff_folders.php') ?>" class="btn btn-secondary mt-4">Back</a>
 </div>
 
 </body>

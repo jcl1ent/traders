@@ -18,7 +18,7 @@ if (isset($_POST['updateTicket'])) {
 
     if ($stmtUpdate->execute()) {
         echo "<script>alert('Ticket information updated successfully');</script>";
-        echo "<script>window.location.href='staff_tickets.php';</script>";
+        echo "<script>window.location.href='" . url('staff/staff_tickets.php') . "';</script>";
     } else {
         echo "<script>alert('Error updating ticket information');</script>";
     }
@@ -142,7 +142,7 @@ if (isset($_POST['updateTicket'])) {
                                 </div>
                                 </div>
                                 <div class="d-flex justify-content-center m-3" style="gap: 10px;">                                    
-                                <a href="staff_tickets.php" class="btn btn-secondary">
+                                <a href="<?= url('staff/staff_tickets.php') ?>" class="btn btn-secondary">
                                     <i class="bi bi-arrow-90deg-left"></i> Back 
                                 </a>
                                 <button type="submit" name="updateTicket" class="btn btn-primary">

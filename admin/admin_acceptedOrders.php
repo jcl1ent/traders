@@ -87,7 +87,7 @@ include("../includes/header.php");
                                                         <td data-label="Payable" style="width: 10%;"><?php echo $row['payable']; ?></td>
                                                         <td data-label="Total Amount" style="width: 10%;"><?php echo $row['totalPrice']; ?></td>
                                                         <?php if($row['orderTrackNo'] == NULL){ ?>
-                                                        <td data-label="Tracking Number" style="width: 15%;"><a href="addTrackNo.php?orderNo=<?php echo $row['orderNo']; ?>">Add Tracking Reference</a></td>
+                                                        <td data-label="Tracking Number" style="width: 15%;"><a href="<?= url('addTrackNo.php?orderNo=' . urlencode($row['orderNo'])) ?>">Add Tracking Reference</a></td>
                                                         <?php } else { ?>
                                                             <td data-label="Tracking Number" style="width: 15%;">
                                                                 <a href="<?php echo htmlspecialchars($row['orderTrackNo']); ?>">

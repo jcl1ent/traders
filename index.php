@@ -1,9 +1,15 @@
 <?php
 session_start();
+
+// configuration and common helpers
+include __DIR__ . "/config.php";   // defines BASE_URL, BASE_PATH, etc.
+
 $page_title = "Ronyx Trading";
-include("includes/header.php"); 
-include("includes/navbar.php");
-include("dbcon.php"); // Your database connection file
+
+// include templates using filesystem paths to avoid reliance on working directory
+include __DIR__ . "/includes/header.php"; 
+include __DIR__ . "/includes/navbar.php";
+include __DIR__ . "/dbcon.php"; // Your database connection file
 if (isset($_POST['login_btn'])) {   
     $email = $_POST['email'];
     $password = $_POST['password'];
@@ -40,14 +46,12 @@ if (isset($_POST['login_btn'])) {
         } else {
             // Password is incorrect
             $_SESSION['status'] = "Invalid password.";
-            header("Location: index.php");
-            exit();
+            redirect('index.php');
         }
     } else {
         // Email not found
         $_SESSION['status'] = "Invalid email.";
-        header("Location: index.php");
-        exit();
+        redirect('index.php');
     }
 }
 ?>
@@ -56,7 +60,7 @@ if (isset($_POST['login_btn'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="css/index.css">
+    <link rel="stylesheet" type="text/css" href="<?= url('css/index.css') ?>">
 </head>
 <body>
 <div class="py-5">
@@ -87,7 +91,7 @@ if (isset($_POST['login_btn'])) {
                         <h5>Login</h5>
                     </div>
                     <div class="card-body">
-                        <form action="logincode.php" method="POST">
+                        <form action="<?= url('logincode.php') ?>" method="POST">
                             <div class="form-group mb-3">
                                 <label for="email">Email</label>
                                 <input type="text" name="email" class="form-control" id="email">
@@ -98,7 +102,7 @@ if (isset($_POST['login_btn'])) {
                             </div>
                             <div class="form-group">
                                 <button type="submit" name="login_btn" class="btn btn-primary">Login</button>
-                                <a href="password_reset.php" class="float-end">Forgot your password?</a>
+                                <a href="<?= url('password_reset.php') ?>" class="float-end">Forgot your password?</a>
                             </div>
                         </form>
                     </div> <!-- Close card-body -->

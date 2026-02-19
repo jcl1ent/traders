@@ -163,18 +163,18 @@ if (isset($_GET['page_title'])) {
 <!-- Sidebar -->
 <div class="w3-sidebar w3-bar-block w3-border-right oval-button" style="display:none" id="mySidebar">
     <button onclick="w3_close()" class="w3-bar-item w3-small w3-red oval-button">Close &times;</button>
-    <a href="/traders/admin/admin_dashboard.php" class="w3-bar-item w3-button w3-blue-grey oval-button"> <i class="bi bi-speedometer"></i> Dashboard</a>
-    <a href="/traders/admin/admin_services.php" class="w3-bar-item w3-button w3-blue-grey oval-button"><i class="bi bi-gear-wide-connected"></i> Services</a>
-    <a href="/traders/admin/admin_pendingService.php" class="w3-bar-item w3-button w3-blue-grey oval-button"><i class="bi bi-tools"></i> Service Requests</a>
-    <a href="/traders/admin/admin_products.php" class="w3-bar-item w3-button w3-blue-grey oval-button"><i class="bi bi-box-fill"></i> Products</a>
-    <a href="/traders/admin/admin_pendingOrders.php" class="w3-bar-item w3-button w3-blue-grey oval-button"><i class="bi bi-truck"></i> Orders</a>
-    <a href="/traders/admin/admin_paymentsService.php" class="w3-bar-item w3-button w3-blue-grey oval-button"><i class="bi bi-currency-dollar"></i> Payments</a>
-    <a href="/traders/admin/admin_tickets.php" class="w3-bar-item w3-button w3-blue-grey oval-button"><i class="bi bi-ticket-detailed-fill"></i> Inquiry Ticket</a>
-    <a href="/traders/admin/admin_userAccounts.php" class="w3-bar-item w3-button w3-blue-grey oval-button"><i class="bi bi-person-lines-fill"></i> User Accounts</a>
-    <a href="/traders/admin/admin_feedbacks.php" class="w3-bar-item w3-button w3-blue-grey oval-button"><i class="bi bi-chat-left-text-fill"></i> Feedbacks</a>
-    <a href="/traders/admin/admin_manpower.php" class="w3-bar-item w3-button w3-blue-grey oval-button"><i class="bi bi-person-gear"></i> Manpower</a>
-    <a href="/traders/admin/admin_SalesReport.php" class="w3-bar-item w3-button w3-blue-grey oval-button"><i class="bi bi-bar-chart-line-fill"></i> Sales Reports</a>
-    <a href="/traders/admin/admin_transDocs.php" class="w3-bar-item w3-button w3-blue-grey oval-button"><i class="bi bi-file-earmark-text-fill"></i> Transaction Documents</a>
+    <a href="<?= url('admin/admin_dashboard.php') ?>" class="w3-bar-item w3-button w3-blue-grey oval-button"> <i class="bi bi-speedometer"></i> Dashboard</a>
+    <a href="<?= url('admin/admin_services.php') ?>" class="w3-bar-item w3-button w3-blue-grey oval-button"><i class="bi bi-gear-wide-connected"></i> Services</a>
+    <a href="<?= url('admin/admin_pendingService.php') ?>" class="w3-bar-item w3-button w3-blue-grey oval-button"><i class="bi bi-tools"></i> Service Requests</a>
+    <a href="<?= url('admin/admin_products.php') ?>" class="w3-bar-item w3-button w3-blue-grey oval-button"><i class="bi bi-box-fill"></i> Products</a>
+    <a href="<?= url('admin/admin_pendingOrders.php') ?>" class="w3-bar-item w3-button w3-blue-grey oval-button"><i class="bi bi-truck"></i> Orders</a>
+    <a href="<?= url('admin/admin_paymentsService.php') ?>" class="w3-bar-item w3-button w3-blue-grey oval-button"><i class="bi bi-currency-dollar"></i> Payments</a>
+    <a href="<?= url('admin/admin_tickets.php') ?>" class="w3-bar-item w3-button w3-blue-grey oval-button"><i class="bi bi-ticket-detailed-fill"></i> Inquiry Ticket</a>
+    <a href="<?= url('admin/admin_userAccounts.php') ?>" class="w3-bar-item w3-button w3-blue-grey oval-button"><i class="bi bi-person-lines-fill"></i> User Accounts</a>
+    <a href="<?= url('admin/admin_feedbacks.php') ?>" class="w3-bar-item w3-button w3-blue-grey oval-button"><i class="bi bi-chat-left-text-fill"></i> Feedbacks</a>
+    <a href="<?= url('admin/admin_manpower.php') ?>" class="w3-bar-item w3-button w3-blue-grey oval-button"><i class="bi bi-person-gear"></i> Manpower</a>
+    <a href="<?= url('admin/admin_SalesReport.php') ?>" class="w3-bar-item w3-button w3-blue-grey oval-button"><i class="bi bi-bar-chart-line-fill"></i> Sales Reports</a>
+    <a href="<?= url('admin/admin_transDocs.php') ?>" class="w3-bar-item w3-button w3-blue-grey oval-button"><i class="bi bi-file-earmark-text-fill"></i> Transaction Documents</a>
     <br><br><br><br>
 </div>
 
@@ -225,7 +225,7 @@ if (isset($_GET['page_title'])) {
         <span class="username"><?php echo $firstName; ?></span>
     </button>
     <ul class="dropdown-menu dropdown-menu-end">
-        <li><a class="dropdown-item" href="/traders/userDetails.php?userId=<?php echo $_SESSION['userId']; ?>">User Details</a></li>
+        <li><a class="dropdown-item" href="<?= url('userDetails.php?userId=' . urlencode($_SESSION['userId'])) ?>">User Details</a></li>
         <li><a class="dropdown-item" href="/traders/admin/admin_changePass.php?userId=<?php echo $_SESSION['userId']; ?>">Change Password</a></li>
         <li><a class="dropdown-item" href="/traders/logout.php">Logout</a></li>
     </ul>

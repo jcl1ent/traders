@@ -27,7 +27,7 @@ $checkStmt->close();
 // Redirect if feedback already submitted
 if ($feedbackCount > 0) {
     echo "<script>alert('You have already submitted feedback for this Order.');</script>";
-    echo "<script>window.location.href = 'vticket_customer.php';</script>";
+    echo "<script>window.location.href = '" . url('customer/vticket_customer.php') . "';</script>";
     exit();
 }
 
@@ -46,11 +46,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Execute the statement and check for success
     if ($stmt->execute()) {
         echo "<script>alert('Feedback submitted successfully!');</script>";
-        echo "<script>window.location.href = 'vticket_customer.php?feedback=success';</script>";
+        echo "<script>window.location.href = '" . url('customer/vticket_customer.php?feedback=success') . "';</script>";
         exit();
     } else {
         echo "<script>alert('Error submitting feedback. Please try again later.');</script>";
-        echo "<script>window.location.href = 'vticket_customer.php';</script>";
+        echo "<script>window.location.href = '" . url('customer/vticket_customer.php') . "';</script>";
         exit();
     }
 }
@@ -78,11 +78,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 </div>
                 
                 <button type="submit" class="btn btn-primary">Submit Feedback</button>
-                <a href="vticket_customer.php" class="btn btn-secondary">Cancel</a>
+                <a href="<?= url('customer/vticket_customer.php') ?>" class="btn btn-secondary">Cancel</a>
             </form>
         <?php else: ?>
             <p class="alert alert-info">You have already submitted feedback for this order.</p>
-            <a href="vticket_customer.php" class="btn btn-secondary">Back to Order Account</a>
+            <a href="<?= url('customer/vticket_customer.php') ?>" class="btn btn-secondary">Back to Order Account</a>
         <?php endif; ?>
     </div>
 </body>

@@ -30,7 +30,7 @@ if (isset($_POST['UpdateStaff'])) {
         // Validate contact number format
         if (!preg_match("/^09\d{9}$/", $contact_number)) {
             echo "<script>alert('Invalid contact number. It must start with 09 and be 11 digits long');</script>";
-            echo "<script>window.location.href='updateUserDetails.php?userId= $userId';</script>";
+            echo "<script>window.location.href='" . url('updateUserDetails.php?userId=' . urlencode($userId)) . "';</script>";
             exit();
         }
 
@@ -47,7 +47,7 @@ if (isset($_POST['UpdateStaff'])) {
 
             if ($customer_stmt->execute()) {
                 echo "<script>alert('User Information updated successfully');</script>";
-                echo "<script>window.location.href='updateStaffDetails.php?userId= $userId';</script>";
+                echo "<script>window.location.href='" . url('staff/updateStaffDetails.php?userId=' . urlencode($userId)) . "';</script>";
             } else {
                 echo "<script>alert('Error updating information');</script>";
             }
@@ -75,7 +75,7 @@ if (isset($_POST['UpdateStaff'])) {
                     <div class="card shadow">
                         <div class="card-header">   
                         <div class="div d-flex justify-content-end" >
-                                                    <a href="staff_changepass.php?userId=<?php echo $_SESSION['userId']; ?>" >
+                                                    <a href="<?= url('staff/staff_changepass.php?userId=' . urlencode($_SESSION['userId'])) ?>" >
                                                         <button type="button" class="btn btn-white">
                                                             Change Password
                                                         </button>                                                       
@@ -163,7 +163,7 @@ if (isset($_POST['UpdateStaff'])) {
                                                     </div>
                                                                                                        
                                                     <div class="button" style="gap: 15px;">
-                                                    <a href="staff_dashboard.php" >
+                                                    <a href="<?= url('staff/staff_dashboard.php') ?>" >
                                                         <button type="button" class="btn btn-secondary bg-gradient">
                                                             Back
                                                         </button>                                                       
@@ -179,7 +179,7 @@ if (isset($_POST['UpdateStaff'])) {
                                             } 
                                         }else{
                                             echo 'Invalid user ID';
-                                            echo "<script>window.location.href='updateStaffDetails.php?userId= $userId';</script>";
+                                            echo "<script>window.location.href='" . url('staff/updateStaffDetails.php?userId=' . urlencode($userId)) . "';</script>";
                                         }
                                 ?>      
                             </div>

@@ -64,7 +64,7 @@ if (isset($_SESSION['email']) && isset($_SESSION['custId'])  && isset($_SESSION[
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="../css/style.css">
+    <link rel="stylesheet" type="text/css" href="<?= url('css/style.css') ?>">
 </head>
 <body>
     <div class="py-5">
@@ -88,7 +88,7 @@ if (isset($_SESSION['email']) && isset($_SESSION['custId'])  && isset($_SESSION[
                                     }
                                 ?>
                                 </div>
-                                <a class="medium text-white" href="vservice_customer.php"><i class="fas fa-angle-right">Full Details</i></a>
+                                <a class="medium text-white" href="<?= url('customer/vservice_customer.php') ?>"><i class="fas fa-angle-right">Full Details</i></a>
                             </div>
                     </div>
                 </div>
@@ -110,7 +110,7 @@ if (isset($_SESSION['email']) && isset($_SESSION['custId'])  && isset($_SESSION[
                                         }
                                     ?>
                                 </div>
-                                <a class="medium text-white" href="vserviceAcc_customer.php"><i class="fas fa-angle-right">Full Details</i></a>
+                                <a class="medium text-white" href="<?= url('customer/vserviceAcc_customer.php') ?>"><i class="fas fa-angle-right">Full Details</i></a>
                             </div>
                     </div>
                 </div>
@@ -132,7 +132,7 @@ if (isset($_SESSION['email']) && isset($_SESSION['custId'])  && isset($_SESSION[
                                 }
                                 ?>
                                 </div>
-                                <a class="medium text-white" href="vserviceDec_customer.php"><i class="fas fa-angle-right">Full Details</i></a>
+                                <a class="medium text-white" href="<?= url('customer/vserviceDec_customer.php') ?>"><i class="fas fa-angle-right">Full Details</i></a>
                             </div>
                     </div>
                 </div>
@@ -154,7 +154,7 @@ if (isset($_SESSION['email']) && isset($_SESSION['custId'])  && isset($_SESSION[
                                     }
                                 ?>
                                 </div>
-                                <a class="medium text-white" href="vticket_customer.php"><i class="fas fa-angle-right">Full Details</i></a>
+                                <a class="medium text-white" href="<?= url('customer/vticket_customer.php') ?>"><i class="fas fa-angle-right">Full Details</i></a>
                             </div>
                     </div>
                 </div>
@@ -174,7 +174,7 @@ if (isset($_SESSION['email']) && isset($_SESSION['custId'])  && isset($_SESSION[
                                     }
                                 ?>
                                 </div>
-                                <a class="medium text-white" href="vorder_customer.php"><i class="fas fa-angle-right">Full Details</i></a>
+                                <a class="medium text-white" href="<?= url('customer/vorder_customer.php') ?>"><i class="fas fa-angle-right">Full Details</i></a>
                             </div>
                     </div>
                 </div>
@@ -194,7 +194,7 @@ if (isset($_SESSION['email']) && isset($_SESSION['custId'])  && isset($_SESSION[
                                     }
                                 ?>
                                 </div>
-                                <a class="medium text-white" href="vorder_customer.php"><i class="fas fa-angle-right">Full Details</i></a>
+                                <a class="medium text-white" href="<?= url('customer/vorder_customer.php') ?>"><i class="fas fa-angle-right">Full Details</i></a>
                             </div>
                     </div>
                 </div>
@@ -257,7 +257,7 @@ if (isset($_SESSION['email']) && isset($_SESSION['custId'])  && isset($_SESSION[
                         echo "</div>";
                     ?>
                     </div>
-                    <a class="d-block text-center mt-2 text-white bg-dark p-1 rounded" href="customerServiceList.php" style="text-decoration: none; font-size: 1.1rem;">
+                    <a class="d-block text-center mt-2 text-white bg-dark p-1 rounded" href="<?= url('customer/customerServiceList.php') ?>" style="text-decoration: none; font-size: 1.1rem;">
                         <i class="fas fa-angle-right"></i> Full Details
                     </a>
                 </div>
@@ -312,7 +312,7 @@ if (isset($_SESSION['email']) && isset($_SESSION['custId'])  && isset($_SESSION[
                         echo "</div>";
                     ?>
                     </div>
-                    <a class="d-block text-center mt-2 text-white bg-dark p-1 rounded" href="products_customer.php" style="text-decoration: none; font-size: 1.1rem;">
+                    <a class="d-block text-center mt-2 text-white bg-dark p-1 rounded" href="<?= url('customer/products_customer.php') ?>" style="text-decoration: none; font-size: 1.1rem;">
                         <i class="fas fa-angle-right"></i> Full Details
                     </a>
                 </div>

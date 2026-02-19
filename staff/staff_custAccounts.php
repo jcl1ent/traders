@@ -70,7 +70,7 @@ include("../includes/header.php");
                                                             <td data-label="Status"><?php echo "<p style='color: $color;'>".ucfirst($row['user_status'])."</p>"; ?></td>
                                                             <td data-label="Created Date"><?php echo $row['created_at']; ?></td>                                                
                                                             <td data-label="Actions">
-                                                                <a href="staff_custInfo.php?userId=<?php echo $row['userId']; ?>">
+                                                                <a href="<?= url('staff_custInfo.php?userId=' . urlencode($row['userId'])) ?>">
                                                                     <button type="button" class="btn btn-primary bg-gradient">
                                                                         Details
                                                                     </button>

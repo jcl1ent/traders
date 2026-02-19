@@ -54,7 +54,7 @@ if (isset($_POST['updateManpower'])) {
 
         if ($stmt->execute()) {
             echo "<script>alert('Manpower information updated successfully');</script>";
-            echo "<script>window.location.href='staff_manpower.php';</script>";
+            echo "<script>window.location.href='" . url('staff/staff_manpower.php') . "';</script>";
         } else {
             echo "<script>alert('Error updating manpower information');</script>";
         }
@@ -151,11 +151,11 @@ if (isset($_POST['updateManpower'])) {
                                     $archive_result = mysqli_query($con, $archive_query);
                                     $archive_row = mysqli_fetch_assoc($archive_result);
                                     if($archive_row['mpArchive'] == 1){ ?>
-                                <a href="staff_archivedManpower.php" class="btn btn-secondary">
+                                <a href="<?= url('staff/staff_archivedManpower.php') ?>" class="btn btn-secondary">
                                     <i class="bi bi-arrow-90deg-left"></i> Back 
                                 </a>
                                 <?php  } else { ?>
-                                <a href="staff_manpower.php" class="btn btn-secondary">
+                                <a href="<?= url('staff/staff_manpower.php') ?>" class="btn btn-secondary">
                                     <i class="bi bi-arrow-90deg-left"></i> Back 
                                 </a>
                                 <?php } ?>

@@ -21,7 +21,7 @@ include("../includes/header.php");
                     <div class="card shadow">
                         <div class="card-header"> 
                         <h4 class="mb-0"> Print Receipt
-                                <a href="staff_paymentsService.php" class="btn btn-secondary px-4 mx-1 float-end">
+                                <a href="<?= url('staff/staff_paymentsService.php') ?>" class="btn btn-secondary px-4 mx-1 float-end">
                                     Back
                                 </a>
                                 

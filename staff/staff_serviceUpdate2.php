@@ -12,7 +12,7 @@ if (isset($_POST['update'])) {
     if (!preg_match("/^09\d{9}$/", $contact_number)) {
         echo "<script>
                 alert('Invalid contact number. It must start with 09 and be 11 digits long.');
-                window.location.href = 'staff_serviceRequest.php.php';
+                window.location.href = '<?= url('staff/staff_serviceRequest.php') ?>';
               </script>";
         exit();
     }
@@ -40,7 +40,7 @@ if (isset($_POST['update'])) {
     $servStatus = $_POST['servStatus'] ?? $currentRow['servStatus'];
 
     if (strtotime($schedule) <= time()) {
-        echo "<script>alert('Error: Schedule date and time must be in the future.');window.location.href = 'staff_serviceRequest.php;</script>";
+        echo "<script>alert('Error: Schedule date and time must be in the future.');window.location.href = '" . url('staff/staff_serviceRequest.php') . "';</script>";
         exit();
     }
 
@@ -393,7 +393,7 @@ if (isset($_GET['reqserv'])) {
 
                                 <div class="text-center">
                                     <button class="btn btn-primary" type="submit" name="update">Update</button>
-                                    <a href="staff_serviceRequest.php" class="btn btn-secondary">Back</a>
+                                    <a href="<?= url('staff/staff_serviceRequest.php') ?>" class="btn btn-secondary">Back</a>
                                 </div>
                             </form>
 

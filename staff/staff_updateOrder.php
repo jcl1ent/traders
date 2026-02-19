@@ -21,7 +21,7 @@ if (isset($_POST['updateOrder'])) {
     $stmt->bind_param("sdsssi", $assignedStaff, $totalPrice, $payable, $paymentType, $status, $orderNo);
     if($stmt->execute()){
         echo "<script>alert('Order updated successfully!');</script>";
-        echo "<script>window.location.href='staff_orders.php';</script>";
+        echo "<script>window.location.href='" . url('staff/staff_orders.php') . "';</script>";
     } // Execute the query
     $stmt->close();
 
@@ -307,7 +307,7 @@ if (isset($_POST['updateOrder'])) {
                                     } ?>
                                     </div>
                                     <div class="d-flex justify-content-center m-3" style="gap: 10px;">
-                                        <a href="staff_orders.php" class="btn btn-secondary">
+                                        <a href="<?= url('staff/staff_orders.php') ?>" class="btn btn-secondary">
                                             <i class="bi bi-arrow-90deg-left"></i> Back 
                                         </a>
                                         <button type="submit" name="updateOrder" class="btn btn-primary">

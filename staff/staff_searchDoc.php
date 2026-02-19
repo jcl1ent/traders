@@ -33,7 +33,7 @@ if (isset($_POST['delete_doc'])) {
     if ($deleteStmt->execute()) {
         echo "<script>
     alert('Document deleted successfully!');
-    window.location.href = 'staff_searchDoc.php';
+    window.location.href = '<?= url('staff/staff_searchDoc.php') ?>';
 </script>";
     } else {
         echo "<div class='alert alert-danger'>Error deleting document: " . htmlspecialchars($deleteStmt->error) . "</div>";
@@ -107,7 +107,7 @@ $stmt->close();
             <?php endif; ?>
         </tbody>
     </table>
-    <a href="staff_transDocs.php" class="btn btn-secondary mt-4">Back</a>
+    <a href="<?= url('staff/staff_transDocs.php') ?>" class="btn btn-secondary mt-4">Back</a>
 </div>
 </body>
 </html>

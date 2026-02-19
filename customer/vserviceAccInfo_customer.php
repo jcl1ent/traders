@@ -158,7 +158,7 @@ include("../dbcon.php");
                                         <input class="form-control" type="text" value="<?php echo htmlspecialchars($row['schedule'] ?? 'None'); ?>" disabled readonly>
                                     </div>
                                 </div>
-                                <a href="vserviceAcc_customer.php">
+                                <a href="<?= url('customer/vserviceAcc_customer.php') ?>">
                                     <button type="button" class="btn btn-secondary">
                                         <i class="bi bi-arrow-90deg-left"></i> Back 
                                     </button>

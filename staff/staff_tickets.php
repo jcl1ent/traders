@@ -57,7 +57,7 @@ include("../includes/header.php");
                                                                     <td data-label="Status"><?php echo $row['status']; ?></td> 
                                                                     <td data-label="Delete">
                                                                         <div class="buttons d-flex justify-content-center" style="gap: 5px;">
-                                                                            <a href="staff_updateTicket.php?tickNo=<?php echo $row['tickNo']; ?>">
+                                                                            <a href="<?= url('staff/staff_updateTicket.php?tickNo=' . urlencode($row['tickNo'])) ?>">
                                                                                 <button type="button" class="btn  btn-success">
                                                                                 <i class="bi bi-arrow-repeat"></i> Update
                                                                                 </button>

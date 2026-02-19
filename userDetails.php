@@ -1,5 +1,6 @@
 <?php
 $page_title = "User Details";
+include __DIR__ . "/config.php";
 include("dbcon.php");
 include("logincode.php");
 include("includes/header.php");
@@ -32,7 +33,7 @@ if(isset($_SESSION['userId'])){
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="css/sidebar.css">
+    <link rel="stylesheet" type="text/css" href="<?= url('css/sidebar.css') ?>">
 </head>
 <body>
 <div class="py-5">
@@ -123,7 +124,7 @@ if(isset($_SESSION['userId'])){
                                                         </div>
                                                     </div>
                                                     
-                                                    <a href="customer/dashboard.php">
+                                                    <a href="<?= url('customer/dashboard.php') ?>">
                                                         <button type="button" class="btn btn-secondary bg-gradient">
                                                             Back
                                                         </button>
@@ -182,7 +183,7 @@ if(isset($_SESSION['userId'])){
                                                         <input class="form-control" type="text" value="<?php echo $row['password'] ?>" readonly>                                                
                                                         </div>
                                                     </div>
-                                                    <a href="staff/staff_dashboard.php">
+                                                    <a href="<?= url('staff/staff_dashboard.php') ?>">
                                                         <button type="button" class="btn btn-secondary bg-gradient">
                                                             Back
                                                         </button>
@@ -236,7 +237,7 @@ if(isset($_SESSION['userId'])){
                                                         <input class="form-control" type="text" value="<?php echo $admin['password']; ?>" readonly>                                                
                                                         </div>
                                                     </div>
-                                                    <a href="admin/admin_dashboard.php">
+                                                    <a href="<?= url('admin/admin_dashboard.php') ?>">
                                                         <button type="button" class="btn btn-secondary bg-gradient">
                                                             Back
                                                         </button>

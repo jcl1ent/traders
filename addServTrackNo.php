@@ -123,7 +123,7 @@ if(isset($_POST['addServTrackNo'])){
                                                  <i class="bi bi-arrow-90deg-left"></i> Back
                                             </a>
                                         <?php }else if($row['role'] == 'staff'){ ?>
-                                            <a href="staff_acceptedService.php" class="btn btn-secondary">
+                                            <a href="<?= url('staff/staff_acceptedService.php') ?>" class="btn btn-secondary">
                                         <i class="bi bi-arrow-90deg-left"></i> Back
                                     </a>
                                       <?php  }

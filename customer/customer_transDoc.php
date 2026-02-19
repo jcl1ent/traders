@@ -137,7 +137,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <div class="container mt-5">
 
 <div class="d-flex justify-content-end mb-4">
-    <a href="customer_docReq.php" class="btn btn-primary">Document Requests</a>
+    <a href="<?= url('customer/customer_docReq.php') ?>" class="btn btn-primary">Document Requests</a>
 </div>
 
     <h2>Document Request Form</h2>

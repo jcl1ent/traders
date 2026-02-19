@@ -114,7 +114,7 @@ if (isset($_POST['deleteService'])) {
                                     <div class="col-lg-4 col-md-6 col-sm-12 p-2">
                                         <div class="border border-dark rounded p-3">
                                             <div class="delete_button d-flex justify-content-end mb-3" style="gap: 10px;"> 
-                                            <a href="staff_updateService.php?servCode=<?php echo $row['servCode']; ?>">
+                                            <a href="<?= url('staff/staff_updateService.php?servCode=' . urlencode($row['servCode'])) ?>">
                                                 <button type="button" class="btn btn-success">
                                                 <i class="bi bi-arrow-clockwise"></i>Update
                                                 </button>
