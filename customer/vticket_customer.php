@@ -1,6 +1,6 @@
 <?php
-include("../logincode.php");
-include("../dbcon.php");
+require_once __DIR__ . "/../logincode.php";
+require_once __DIR__ . "/../dbcon.php";
 
 if (isset($_POST['deleteTicket'])) {
     $tickNo = $_POST['tickNo'];
@@ -20,9 +20,45 @@ if (isset($_POST['deleteTicket'])) {
     redirect('customer/vticket_customer.php');
 }
 
+// Handle feedback submission
+if (isset($_POST['submitFeedback'])) {
+    $userId = $_SESSION['userId'];
+    $tickNo = $_POST['tickNo'];
+    $title = $_POST['feedbackTitle'];
+    $description = $_POST['feedbackDescription'];
+    $satisfaction = isset($_POST['satisfaction']) && is_numeric($_POST['satisfaction']) ? (int)$_POST['satisfaction'] : 0;
+    $trscnType = "Ticket No. " . htmlspecialchars($tickNo) . " - " . htmlspecialchars($title);
+
+    // Check if feedback already submitted for this ticket
+    $checkQuery = "SELECT COUNT(*) FROM feedback WHERE userId = ? AND trscnType = ?";
+    $checkStmt = $con->prepare($checkQuery);
+    $checkStmt->bind_param("is", $userId, $trscnType);
+    $checkStmt->execute();
+    $checkStmt->bind_result($feedbackCount);
+    $checkStmt->fetch();
+    $checkStmt->close();
+
+    if ($feedbackCount > 0) {
+        $_SESSION['status'] = "You have already submitted feedback for this ticket.";
+    } else {
+        // Insert feedback with satisfaction rating
+        $insertQuery = "INSERT INTO feedback (userId, trscnType, description, satisfaction) VALUES (?, ?, ?, ?)";
+        $insertStmt = $con->prepare($insertQuery);
+        $insertStmt->bind_param("issi", $userId, $trscnType, $description, $satisfaction);
+        
+        if ($insertStmt->execute()) {
+            $_SESSION['status'] = "Feedback submitted successfully!";
+        } else {
+            $_SESSION['status'] = "Error submitting feedback. Please try again.";
+        }
+        $insertStmt->close();
+    }
+    redirect('customer/vticket_customer.php');
+}
+
 $page_title = "View Ticket";
-include("sidebar.php");
-include("../includes/header.php");
+include __DIR__ . "/sidebar.php";
+include __DIR__ . "/../includes/header.php";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -97,14 +133,9 @@ include("../includes/header.php");
                                                                 <?php
                                                                 echo "<!-- Debugging: status: " . $row['status'] . " -->";
                                                                 if ($row['status'] === 'Closed') { ?>
-                                                                    <div class="text-center">
-                                                                        <form action="ticket_feedback.php" method="GET" class="d-inline">
-                                                                            <input type="hidden" name="userId" value="<?php echo $loggedUserId; ?>">
-                                                                            <input type="hidden" name="trscnType" value="<?php echo htmlspecialchars($row['title']); ?>">
-                                                                            <input type="hidden" name="tickNo" value="<?php echo htmlspecialchars($row['tickNo']); ?>">
-                                                                            <button type="submit" class="btn btn-warning">Feedback</button>
-                                                                        </form>
-                                                                    </div>
+                                                                    <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#feedbackModal" data-ticket-no="<?php echo $row['tickNo']; ?>">
+                                                                        <i class="bi bi-hand-thumbs-up"></i> Feedback
+                                                                    </button>                                                                   
                                                                 <?php } ?>
                                                             </td>
                                                         </tr>
@@ -143,6 +174,42 @@ include("../includes/header.php");
             </div>
         </div>
     </div>
+    <div class="modal fade" id="feedbackModal" tabindex="-1" role="dialog" aria-labelledby="feedbackModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="feedbackModalLabel">Submit Feedback</h5>
+                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form method="POST" action="">
+                    <div class="modal-body">
+                        <input type="hidden" id="feedbackTickNo" name="tickNo" value="">
+                        <input type="hidden" id="feedbackTitle" name="feedbackTitle" value="">
+                        <input type="hidden" id="satisfactionRating" name="satisfaction" value="0">
+                        <div class="rating mb-3">
+                            <label class="form-label">Satisfaction Level:</label>
+                            <div id="starContainer">
+                                <span class="star" data-value="1" title="Very Poor">&#9733;</span>
+                                <span class="star" data-value="2" title="Poor">&#9733;</span>
+                                <span class="star" data-value="3" title="Fair">&#9733;</span>
+                                <span class="star" data-value="4" title="Good">&#9733;</span>
+                                <span class="star" data-value="5" title="Excellent">&#9733;</span>
+                            </div>
+                            <p><small id="ratingText" class="text-muted">Click to rate</small></p>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="feedbackDescription" class="form-label">Your Feedback:</label>
+                            <textarea class="form-control" id="feedbackDescription" name="feedbackDescription" required></textarea>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" name="submitFeedback" class="btn btn-primary">Submit Feedback</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 </body>
 <script type="text/javascript">
     // Trigger the modal and set the orderNo value
@@ -152,6 +219,60 @@ include("../includes/header.php");
         var tickNo = button.getAttribute('data-ticket-no'); // Extract orderNo from data-* attributes
         var inputTicketNo = deleteModal.querySelector('#tickNo'); // Get the hidden input inside the form
         inputTicketNo.value = tickNo; // Set the orderNo value in the hidden input
+    });
+
+    var feedbackModal = document.getElementById('feedbackModal');
+    feedbackModal.addEventListener('show.bs.modal', function(event) {
+        var button = event.relatedTarget;
+        var tickNo = button.getAttribute('data-ticket-no');
+        var titleText = button.closest('tr').querySelector('td:nth-child(2)').textContent;
+        document.getElementById('feedbackTickNo').value = tickNo;
+        document.getElementById('feedbackTitle').value = titleText;
+        document.getElementById('feedbackDescription').value = '';
+        resetStarRating(); // Reset rating when modal opens
+    });
+
+    // Star rating functionality
+    function resetStarRating() {
+        document.querySelectorAll('.star').forEach(star => star.classList.remove('active'));
+        document.getElementById('satisfactionRating').value = 0;
+        document.getElementById('ratingText').textContent = 'Click to rate';
+    }
+
+    document.querySelectorAll('.star').forEach(star => {
+        star.addEventListener('click', function() {
+            const value = this.getAttribute('data-value');
+            document.getElementById('satisfactionRating').value = value;
+            
+            // Highlight stars
+            document.querySelectorAll('.star').forEach(s => {
+                if (s.getAttribute('data-value') <= value) {
+                    s.classList.add('active');
+                } else {
+                    s.classList.remove('active');
+                }
+            });
+            
+            // Update label
+            const labels = { 5: 'Excellent', 4: 'Good', 3: 'Fair', 2: 'Poor', 1: 'Very Poor' };
+            document.getElementById('ratingText').textContent = labels[value] + ' (' + value + '/5)';
+        });
+
+        // Hover effect
+        star.addEventListener('mouseover', function() {
+            const value = this.getAttribute('data-value');
+            document.querySelectorAll('.star').forEach(s => {
+                if (s.getAttribute('data-value') <= value) {
+                    s.classList.add('hover');
+                } else {
+                    s.classList.remove('hover');
+                }
+            });
+        });
+    });
+
+    document.getElementById('starContainer').addEventListener('mouseleave', function() {
+        document.querySelectorAll('.star').forEach(s => s.classList.remove('hover'));
     });
 </script>
 

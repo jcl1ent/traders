@@ -138,3 +138,22 @@ img{
     background-color: #d5d8dd !important;
     color: rgb(0, 0, 0) !important;
   }
+
+          .rating .star {
+            font-size: 2rem;
+            color: #ddd;
+            cursor: pointer;
+            margin-right: 5px;
+            transition: color 0.2s ease;
+        }
+        .rating .star:hover,
+        .rating .star.hover {
+            color: #ffc107;
+        }
+        .rating .star.active {
+            color: #ffc107;
+        }
+        #ratingText {
+            margin-top: 10px;
+            font-weight: 500;
+        }
