@@ -1,9 +1,9 @@
 <?php
 $page_title = "Edit Profile";
-include("../logincode.php");
-include("../dbcon.php");
-include("sidebar.php");
-include(__DIR__ . "/../includes/header.php");
+require_once __DIR__ . "/../logincode.php";
+require_once __DIR__ . "/../dbcon.php";
+include __DIR__ . "/sidebar.php";
+include __DIR__ . "/../includes/header.php";
 
 
 if (isset($_POST['UpdateUser'])) {
@@ -30,7 +30,7 @@ if (isset($_POST['UpdateUser'])) {
         // Validate contact number format
         if (!preg_match("/^09\d{9}$/", $contact_number)) {
             echo "<script>alert('Invalid contact number. It must start with 09 and be 11 digits long');</script>";
-            echo "<script>window.location.href='updateUserDetails.php?userId= $userId';</script>";
+            echo "<script>window.location.href='" . url('customer/updateUserDetails.php?userId=' . urlencode($userId)) . "';</script>";
             exit();
         }
 
@@ -47,7 +47,7 @@ if (isset($_POST['UpdateUser'])) {
 
             if ($customer_stmt->execute()) {
                 echo "<script>alert('User Information updated successfully');</script>";
-                echo "<script>window.location.href='updateUserDetails.php?userId= $userId';</script>";
+                echo "<script>window.location.href='" . url('customer/updateUserDetails.php?userId=' . urlencode($userId)) . "';</script>";
             } else {
                 echo "<script>alert('Error updating information');</script>";
             }
@@ -76,12 +76,12 @@ if (isset($_POST['UpdateUser'])) {
                     <div class="card shadow">
                         <div class="card-header">   
                         <div class="div d-flex justify-content-end" >
-                                                    <a href="<?= url('customer/customer_changepass.php?userId=' . urlencode($_SESSION['userId'])) ?>" >
-                                                        <button type="button" class="btn btn-white custom-bg">
-                                                            Change Password
-                                                        </button>                                                       
-                                                    </a>
-                                                    </div>                 
+                            <a href="<?= url('customer/customer_changepass.php?userId=' . urlencode($_SESSION['userId'])) ?>" >
+                                <button type="button" class="btn btn-white custom-bg">
+                                    Change Password
+                                </button>                                                       
+                            </a>
+                        </div>                 
                             <div class="card-body mb-3">
                                 
                                 <?php 
@@ -118,7 +118,7 @@ if (isset($_POST['UpdateUser'])) {
                                                     $customer = $custResult->fetch_assoc();
                                                     $fullName = $customer['firstname'] . ' ' . $customer['middlename'] . ' ' . $customer['lastname'];
                                                     ?>
-                                                    <form action="updateUserDetails.php?userId=<?php echo $userId; ?>" method="POST">
+                                                    <form action="<?= url('customer/updateUserDetails.php?userId=' . urlencode($userId)) ?>" method="POST">
                                                     <!-- <input type="hidden" name="userId" value="<?php echo $row['userId']; ?>"> -->
                                                     <div class="text-center mb-3">
                                                         <label for="userId" class="col col-form-label"><strong>User ID: <?php echo "$userId" ?></strong></label>
@@ -129,7 +129,7 @@ if (isset($_POST['UpdateUser'])) {
                                                     <div class="mb-3 row">
                                                         <label for="email" class="col col-form-label">Email:</label>
                                                         <div class="col">
-                                                        <input class="form-control" type="text" value="<?php echo $customer['email']; ?>">                                                    
+                                                        <input class="form-control" type="text" name="email" value="<?php echo $customer['email']; ?>">                                                    
                                                         </div>
                                                     </div> 
                                                     <div class="mb-3 row">

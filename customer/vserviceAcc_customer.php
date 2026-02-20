@@ -47,6 +47,19 @@ if (isset($_GET['reqserv'])) {
     <link rel="stylesheet" type="text/css" href="<?= url('css/style.css') ?>">
 </head>
 <body>
+    <div class="py-3">
+        <div class="container">
+            <?php
+            if (isset($_SESSION['status'])) {
+                echo '<div class="alert alert-info alert-dismissible fade show" role="alert">
+                ' . $_SESSION['status'] . '
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>';
+                unset($_SESSION['status']);
+            }
+            ?>
+        </div>
+    </div>
     <ul class="nav nav-tabs justify-content-end mt-3" id="navTabs">
         <li class="nav-item">
             <a class="nav-link fs-5" href="<?= url('customer/vservice_customer.php') ?>">Requested Services</a>
